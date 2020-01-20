@@ -87,7 +87,7 @@ class Teachers extends Controller
               $data['email'] .
               '&email_verification_code=' .
               $data['email_verification_code'] .
-              '"></a>'
+              '">😁</a>'
           );
           redirect('teachers/verifyEmail');
         } else {
