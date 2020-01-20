@@ -12,15 +12,19 @@ class Teacher
   {
     $this->db->query(
       'INSERT INTO teachers (
-        email, password
+        email,
+        password,
+        email_verification_code
       ) VALUES (
         :email,
-        :password
+        :password,
+        :email_verification_code
       )'
     );
     // Bind values into query
     $this->db->bind(':email', $data['email']);
     $this->db->bind(':password', $data['password']);
+    $this->db->bind(':email_verification_code', $data['email_verification_code']);
 
     // Execute
     if ($this->db->execute()) {
@@ -54,6 +58,7 @@ class Teacher
                       LIMIT 1');
     $this->db->bind(':email', $email);
     $row = $this->db->single();
+    return $row;
     // Check row
     if ($this->db->rowCount() > 0) {
       return true;
@@ -61,6 +66,7 @@ class Teacher
       return false;
     }
   }
+
   public function getTeacherByEmail($email)
   {
     $this->db->query('SELECT * FROM teachers
