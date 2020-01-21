@@ -7,6 +7,7 @@
 <script src="<?php echo URLROOT; ?>/js/popper.min.js"></script>
 <script src="<?php echo URLROOT; ?>/js/bootstrap.js"></script>
 <script src="<?php echo URLROOT; ?>/js/main.js"></script>
+<script src="<?php echo URLROOT; ?>/js/fillDetails.js"></script>
 </body>
 
 </html>

@@ -87,7 +87,9 @@ class Teachers extends Controller
               $data['email'] .
               '&email_verification_code=' .
               $data['email_verification_code'] .
-              '">😁</a>'
+              '"><img src="' .
+              URLROOT .
+              '/public/images/verifyEmail.jpg"></a>'
           );
           redirect('teachers/verifyEmail');
         } else {
@@ -138,7 +140,7 @@ class Teachers extends Controller
           die('Something went wrong.');
         }
       } else {
-        flash('register_failed', 'Email Not Verified.');
+        flash('register_failed', 'Email Not Verified.', 'alert alert-denger');
         redirect('teachers/verifyEmail');
       }
     }
