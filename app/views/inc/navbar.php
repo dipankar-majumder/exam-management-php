@@ -1,6 +1,8 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark mb-3">
   <div class="container">
-    <a class="navbar-brand" href="<?php echo URLROOT; ?>"><?php echo SITENAME; ?></a>
+    <a class="navbar-brand" href="<?php echo URLROOT; ?>">
+        <img src="https://ue.ucdavis.edu/sites/g/files/dgvnsk4711/files/UE%20Logo-01_1.png" width="35" height="35" class="d-inline-block align-top" alt="">
+        <?php echo SITENAME; ?></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
