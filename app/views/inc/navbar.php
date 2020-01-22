@@ -1,5 +1,4 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark mb-3">
-    <link rel="shortcut icon" type="image/x-icon" href="/exam-management-php/public/images/favicon.ico">
     <div class="container">
     <a class="navbar-brand" href="<?php echo URLROOT; ?>">
         <img src="https://ue.ucdavis.edu/sites/g/files/dgvnsk4711/files/UE%20Logo-01_1.png" width="35" height="35" class="d-inline-block align-top" alt="">
