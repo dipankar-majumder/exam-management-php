@@ -5,16 +5,22 @@
       <?php flash('register_success'); ?>
       <h2>Fill Details</h2>
       <p>Please fill out this form to continue</p>
-      <form action="<?php echo URLROOT; ?>/teachers/fillDetails" method="post">
+      <?php if (empty($_SESSION['email'])) : ?>
+        <div class="alert alert-danger">
+          This would not work directly
+        </div>
+      <?php exit;
+      endif; ?>
+      <form action="<?php echo URLROOT; ?>/teachers/fillDetails" method="post" novalidate>
         <div class="form-group">
           <label for="name">Name: <sup>*</sup></label>
-          <input type="text" name="name" id="name" class="form-control <?php echo (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['name']; ?>" required>
-          <span class="invalid-feedback"><?php echo $data['name_err']; ?></span>
+          <input type="text" name="name" id="name" class="form-control" required>
+          <span class="invalid-feedback"></span>
         </div>
         <div class="form-group">
           <label for="date_of_birth">Date of Birth: <sup>*</sup></label>
-          <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" value="<?php echo $data['date_of_birth']; ?>" required>
-          <span class="invalid-feedback"><?php echo $data['date_of_birth_err']; ?></span>
+          <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" required>
+          <span class="invalid-feedback"></span>
         </div>
         <div class="form-group">
           <label for="highest_educational_qualification">Highest Educational Qualification</label>
@@ -49,7 +55,7 @@
             Additional/Extra/Professional Qualification
           </label>
           <select name="additional_qualification" id="additional_qualification" class="form-control">
-            <option value="0" selected disabled hidden>Select An Option</option>
+            <option value="" selected>Select An Option</option>
             <option value="1">NET</option>
             <option value="2">SLET</option>
             <option value="3">Certificate</option>
@@ -83,8 +89,8 @@
         </div>
         <div class="form-group">
           <label for="department">Department: <sup>*</sup></label>
-          <input type="text" name="department" id="department" class="form-control <?php echo (!empty($data['department_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['department']; ?>" required>
-          <span class="invalid-feedback"><?php echo $data['department_err']; ?></span>
+          <input type="text" name="department" id="department" class="form-control" required>
+          <span class="invalid-feedback"></span>
         </div>
         <div class="form-group">
           <label class="radio-inline control-label">
@@ -144,20 +150,20 @@
         </div>
         <div class="form-group">
           <label for="date_of_joining_in_service">Date of Joining in Service</label>
-          <input type="date" name="date_of_joining_in_service" id="date_of_joining_in_service" class="form-control" value="<?php echo $data['date_of_joining_in_service']; ?>" required>
-          <span class="invalid-feedback"><?php echo $data['date_of_joining_in_service_err']; ?></span>
+          <input type="date" name="date_of_joining_in_service" id="date_of_joining_in_service" class="form-control" required>
+          <span class="invalid-feedback"></span>
         </div>
         <div class="form-group">
           <label for="date_of_joining_in_present_college">Date of Joining in Present College</label>
-          <input type="date" name="date_of_joining_in_present_college" id="date_of_joining_in_present_college" class="form-control" value="<?php echo $data['date_of_joining_in_present_college']; ?>" required>
-          <span class="invalid-feedback"><?php echo $data['date_of_joining_in_present_college_err']; ?></span>
+          <input type="date" name="date_of_joining_in_present_college" id="date_of_joining_in_present_college" class="form-control" required>
+          <span class="invalid-feedback"></span>
         </div>
         <div class="form-group">
           <label for="pay_band">
             Pay Band
           </label>
           <select name="pay_band" id="pay_band" class="form-control">
-            <option value="0" selected disabled hidden>Select An Option</option>
+            <option value="" selected disabled hidden>Select An Option</option>
             <option value="1">5400-25200</option>
             <option value="2">4900-16200</option>
             <option value="3">15600-39100</option>
@@ -167,33 +173,77 @@
         </div>
         <div class="form-group">
           <label for="band_pay">Band Pay</label>
-          <input type="number" name="band_pay" id="band_pay" class="form-control <?php echo (!empty($data['band_pay_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['band_pay']; ?>" required>
+          <input type="number" name="band_pay" id="band_pay" class="form-control" required>
           <span class="invalid-feedback"><?php echo $data['band_pay_err']; ?></span>
         </div>
         <div class="form-group">
           <label for="grade_pay">Academic Grade Pay/Grade Pay</label>
-          <input type="number" name="grade_pay" id="grade_pay" class="form-control <?php echo (!empty($data['grade_pay_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['grade_pay']; ?>" required>
+          <input type="number" name="grade_pay" id="grade_pay" class="form-control" required>
           <span class="invalid-feedback"><?php echo $data['grade_pay_err']; ?></span>
         </div>
         <div class="form-group">
           <label for="pan_number">PAN Number</label>
-          <input type="number" name="pan_number" id="pan_number" class="form-control <?php echo (!empty($data['pan_number_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['pan_number']; ?>" required>
+          <input type="number" name="pan_number" id="pan_number" class="form-control" required>
           <span class="invalid-feedback"><?php echo $data['pan_number_err']; ?></span>
         </div>
         <div class="form-group">
           <label for="mobile_number">Mobile Number</label>
-          <input type="tel" name="mobile_number" id="mobile_number" class="form-control <?php echo (!empty($data['mobile_number_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['mobile_number']; ?>" required>
+          <input type="tel" name="mobile_number" id="mobile_number" class="form-control" required>
           <span class="invalid-feedback"><?php echo $data['mobile_number_err']; ?></span>
         </div>
         <div class="form-group">
           <label for="email">Email: <sup>*</sup></label>
           <input type="email" name="email" id="email" class="form-control" value="<?php echo $_SESSION['email']; ?>" disabled>
-          <span class="invalid-feedback"><?php echo $data['email_err']; ?></span>
+          <span class="invalid-feedback"></span>
         </div>
         <div class="form-group">
           <label for="date_of_superannuation">Date of Superannuation</label>
-          <input type="date" name="date_of_superannuation" id="date_of_superannuation" class="form-control" value="<?php echo $data['date_of_superannuation']; ?>" required>
+          <input type="date" name="date_of_superannuation" id="date_of_superannuation" class="form-control" required>
           <span class="invalid-feedback"><?php echo $data['date_of_superannuation_err']; ?></span>
+        </div>
+        <div class="form-group">
+          <label for="present_address">Present Address</label>
+          <div class="form-group" id="present_address">
+            <label for="house_number">Building Name/House No.</label>
+            <input type="text" name="house_number" id="house_number" class="form-control">
+            <label for="location">Location/Street Name</label>
+            <input type="text" name="location" id="location" class="form-control">
+            <label for="village">Town/Village</label>
+            <input type="text" name="village" id="village" class="form-control">
+            <label for="post_office">Post Office</label>
+            <input type="text" name="post_office" id="post_office" class="form-control">
+            <label for="police_station">Police Station</label>
+            <input type="text" name="police_station" id="police_station" class="form-control">
+            <label for="pin_code">Pin Code</label>
+            <input type="text" name="pin_code" id="pin_code" class="form-control">
+            <label for="district">District</label>
+            <input type="text" name="district" id="district" class="form-control">
+            <label for="state">State</label>
+            <input type="text" name="state" id="state" class="form-control">
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="permanent-equals-present-address">
+            <label class="form-check-label" for="permanent-equals-present-address">Whether Permanent Address is same as Present Address</label>
+          </div>
+          <label for="permanent_address">Permanent Address</label>
+          <div class="form-group" id="permanent_address">
+            <label for="house_number">Building Name/House No.</label>
+            <input type="text" name="house_number" id="house_number" class="form-control">
+            <label for="location">Location/Street Name</label>
+            <input type="text" name="location" id="location" class="form-control">
+            <label for="village">Town/Village</label>
+            <input type="text" name="village" id="village" class="form-control">
+            <label for="post_office">Post Office</label>
+            <input type="text" name="post_office" id="post_office" class="form-control">
+            <label for="police_station">Police Station</label>
+            <input type="text" name="police_station" id="police_station" class="form-control">
+            <label for="pin_code">Pin Code</label>
+            <input type="text" name="pin_code" id="pin_code" class="form-control">
+            <label for="district">District</label>
+            <input type="text" name="district" id="district" class="form-control">
+            <label for="state">State</label>
+            <input type="text" name="state" id="state" class="form-control">
+          </div>
         </div>
         <!-- Buttons -->
         <div class="row">
