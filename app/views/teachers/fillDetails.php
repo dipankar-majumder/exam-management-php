@@ -97,15 +97,15 @@
             Gender
           </label>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="gender" id="gender_male">
+            <input class="form-check-input" type="radio" name="gender" id="gender_male" value="Male">
             <label class="form-check-label" for="gender_male">Male</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="gender" id="gender_female">
+            <input class="form-check-input" type="radio" name="gender" id="gender_female" value="Female">
             <label class="form-check-label" for="gender_female">Female</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="gender" id="gender_others">
+            <input class="form-check-input" type="radio" name="gender" id="gender_others" value="Others">
             <label class="form-check-label" for="gender_others">Others</label>
           </div>
         </div>
@@ -114,23 +114,23 @@
             Category
           </label>
           <div class="form-check">
-            <input type="radio" name="category" id="category_unreserved" class="form-check-input">
+            <input type="radio" name="category" id="category_unreserved" class="form-check-input" value="Unreserved">
             <label for="category_unreserved" class="form-check-label">Unreserved</label>
           </div>
           <div class="form-check">
-            <input type="radio" name="category" id="category_sc" class="form-check-input">
+            <input type="radio" name="category" id="category_sc" class="form-check-input" value="SC">
             <label for="category_sc" class="form-check-label">SC</label>
           </div>
           <div class="form-check">
-            <input type="radio" name="category" id="category_st" class="form-check-input">
+            <input type="radio" name="category" id="category_st" class="form-check-input" value="ST">
             <label for="category_st" class="form-check-label">ST</label>
           </div>
           <div class="form-check">
-            <input type="radio" name="category" id="category_obc_a" class="form-check-input">
+            <input type="radio" name="category" id="category_obc_a" class="form-check-input" value="OBC A">
             <label for="category_obc_a" class="form-check-label">OBC A</label>
           </div>
           <div class="form-check">
-            <input type="radio" name="category" id="category_obc_b" class="form-check-input">
+            <input type="radio" name="category" id="category_obc_b" class="form-check-input" value="OBC B">
             <label for="category_obc_b" class="form-check-label">OBC B</label>
           </div>
         </div>
