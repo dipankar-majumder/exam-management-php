@@ -314,11 +314,17 @@ class Teachers extends Controller
       // Validate Email
       if (empty($data['email'])) {
         $data['email_err'] = 'Please enter email';
-      } else {
-        // Check email
-        if (!$teacher) {
-          $data['email_err'] = 'Email is not registered';
-        }
+      } else if (!$teacher) {
+        // Check existance of teacher
+        $data['email_err'] = 'Email is not registered';
+      } else if ($teacher->email_verification_code != 'true') {
+        $data['email_err'] = 'Email not verified';
+        flash(
+          'login_failed',
+          '<h6>Email Not Verified⚠</h6><hr class="mt-0 mb-1"><div style="clear: both;"></div>
+          Please open verification link from your registered email',
+          'alert alert-danger'
+        );
       }
 
       // Validate Password
