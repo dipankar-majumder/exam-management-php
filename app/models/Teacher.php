@@ -68,28 +68,28 @@ class Teacher
   {
     $this->db->query(
       'UPDATE teachers
-      SET has_details = 1,
-      name = :name,
-      date_of_birth = :date_of_birth,
-      highest_educational_qualification = :highest_educational_qualification,
-      additional_qualification = :additional_qualification,
-      designation = :designation,
-      department = :department,
-      gender = :gender,
-      category = :category,
-      physically_handicapped = :physically_handicapped,
-      ex_service_man = :ex_service_man,
-      exempted_category = :exempted_category,
-      date_of_joining_in_service = :date_of_joining_in_service,
-      date_of_joining_in_present_college = :date_of_joining_in_present_college,
-      pay_band = :pay_band,
-      band_pay = :band_pay,
-      grade_pay = :grade_pay,
-      pan_number = :pan_number,
-      mobile_number = :mobile_number,
-      date_of_superannuation = :date_of_superannuation,
-      addresses = :addresses
-      WHERE email = :email'
+      SET has_details                     = 1,
+      name                                = :name,
+      date_of_birth                       = :date_of_birth,
+      highest_educational_qualification   = :highest_educational_qualification,
+      additional_qualification            = :additional_qualification,
+      designation                         = :designation,
+      department                          = :department,
+      gender                              = :gender,
+      category                            = :category,
+      physically_handicapped              = :physically_handicapped,
+      ex_service_man                      = :ex_service_man,
+      exempted_category                   = :exempted_category,
+      date_of_joining_in_service          = :date_of_joining_in_service,
+      date_of_joining_in_present_college  = :date_of_joining_in_present_college,
+      pay_band                            = :pay_band,
+      band_pay                            = :band_pay,
+      grade_pay                           = :grade_pay,
+      pan_number                          = :pan_number,
+      mobile_number                       = :mobile_number,
+      date_of_superannuation              = :date_of_superannuation,
+      addresses                           = :addresses
+      WHERE email                         = :email'
     );
 
     $this->db->bind(':name', $data['name']);
