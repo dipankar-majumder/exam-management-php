@@ -334,32 +334,33 @@ class Teachers extends Controller
 
       // Make sure errors are empty
       if (
-        $teacher->has_details &&
         empty($data['email_err']) &&
         empty($data['password_err']) &&
         empty($data['confirm_password_err'])
       ) {
         //
         session_start();
-        $_SESSION['teacher_email'] = $teacher->email;
+        $_SESSION['email'] = $teacher->email;
         if ($teacher->has_details) {
+          unset($_SESSION['email']);
+          $_SESSION['teacher_email'] = $teacher->email;
           $_SESSION['teacher_id'] = $teacher->id;
           redirect('teachers');
         } else {
           redirect('teachers/fillDetails');
         }
-      } else {
-        if (!$teacher->has_details) {
-          flash(
-            'login_failed',
-            'Please fill up your details.<div style="clear: both;"></div>
+      } else if ($teacher && !$teacher->has_details) {
+        flash(
+          'login_failed',
+          '<h6>Please fill up your details.</h6><hr class="mt-0 mb-1"><div style="clear: both;"></div>
             Go To <a href="' .
-              URLROOT .
-              '/teachers/fillDetails">Fill Details Form</a>'
-          );
-          // Load view with errors
-          $this->view('teachers/login');
-        }
+            URLROOT .
+            '/teachers/fillDetails">Fill Details Form</a>',
+          'alert alert-danger'
+        );
+        // Load view with errors
+        $this->view('teachers/login', $data);
+      } else {
         $this->view('teachers/login', $data);
       }
     } else {
@@ -381,8 +382,9 @@ class Teachers extends Controller
   {
     $this->view('teachers/index');
   }
-  public function logout(){
-    if($_SERVER['REQUEST_METHOD'] == 'GET'){
+  public function logout()
+  {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       session_destroy();
       redirect('');
     }
