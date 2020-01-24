@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2020 at 11:45 AM
+-- Generation Time: Jan 24, 2020 at 02:11 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -211,39 +211,41 @@ CREATE TABLE `present_addresses` (
 
 CREATE TABLE `teachers` (
   `id` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verification_code` varchar(255) DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
+  `email` tinytext NOT NULL,
+  `email_verification_code` tinytext DEFAULT NULL,
+  `password` tinytext NOT NULL,
   `has_details` tinyint(1) NOT NULL DEFAULT 0,
-  `hrms_code` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `hrms_code` tinytext DEFAULT NULL,
+  `name` tinytext DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
-  `highest_educational_qualification` int(11) DEFAULT NULL,
-  `additional_qualification` int(11) DEFAULT NULL,
-  `designation` int(11) DEFAULT NULL,
-  `department` int(11) DEFAULT NULL,
-  `gender` int(11) DEFAULT NULL,
-  `category` int(11) DEFAULT NULL,
+  `highest_educational_qualification` tinytext DEFAULT NULL,
+  `additional_qualification` tinytext DEFAULT NULL,
+  `designation` tinytext DEFAULT NULL,
+  `department` tinytext DEFAULT NULL,
+  `gender` tinytext DEFAULT NULL,
+  `category` tinytext DEFAULT NULL,
   `physically_handicapped` tinyint(1) DEFAULT NULL,
   `ex_service_man` tinyint(1) DEFAULT NULL,
   `exempted_category` tinyint(1) DEFAULT NULL,
+  `date_of_joining_in_service` date DEFAULT NULL,
   `date_of_joining_in_present_college` date DEFAULT NULL,
-  `pay_band` int(11) DEFAULT NULL,
+  `pay_band` tinytext DEFAULT NULL,
   `band_pay` int(11) DEFAULT NULL,
   `grade_pay` int(11) DEFAULT NULL,
   `pan_number` int(11) DEFAULT NULL,
-  `mobile_number` int(11) DEFAULT NULL,
+  `mobile_number` int(11) UNSIGNED DEFAULT NULL,
   `date_of_superannuation` date DEFAULT NULL,
-  `present_addresses` int(11) DEFAULT NULL,
-  `permanent_addresses` int(11) DEFAULT NULL
+  `present_address` int(11) DEFAULT NULL,
+  `permanent_address` int(11) DEFAULT NULL,
+  `addresses` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '{}'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `teachers`
 --
 
-INSERT INTO `teachers` (`id`, `email`, `email_verification_code`, `password`, `has_details`, `hrms_code`, `name`, `date_of_birth`, `highest_educational_qualification`, `additional_qualification`, `designation`, `department`, `gender`, `category`, `physically_handicapped`, `ex_service_man`, `exempted_category`, `date_of_joining_in_present_college`, `pay_band`, `band_pay`, `grade_pay`, `pan_number`, `mobile_number`, `date_of_superannuation`, `present_addresses`, `permanent_addresses`) VALUES
-(6, 'teacher0@gmail.com', 'true', '$2y$10$3sOoELdpm4Q45vxllpiBYOTBcwO5yAF8/9tRAVSKcWqitZ3SqPWTW', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `teachers` (`id`, `email`, `email_verification_code`, `password`, `has_details`, `hrms_code`, `name`, `date_of_birth`, `highest_educational_qualification`, `additional_qualification`, `designation`, `department`, `gender`, `category`, `physically_handicapped`, `ex_service_man`, `exempted_category`, `date_of_joining_in_service`, `date_of_joining_in_present_college`, `pay_band`, `band_pay`, `grade_pay`, `pan_number`, `mobile_number`, `date_of_superannuation`, `present_address`, `permanent_address`, `addresses`) VALUES
+(1, 'teacher0@gmail.com', 'true', '$2y$10$Wsd67AHn42L336ZvbUJIvuSe6SMoHWnbjtJhMbM.pKU4RhtBi7BWu', 1, NULL, 'Teacher Zero', '2020-01-24', 'Post Doctoral', 'PG Diploma', 'Principal', 'Computer Science', 'on', 'on', 0, 0, 0, '2020-01-24', '2020-01-24', '37400-67000', 1, 1, 1, 4294967295, '2020-01-24', NULL, NULL, '{\"present_address\":{\"house_number\":\"1234\",\"location\":\"Example Street\",\"village\":\"Demo Village\",\"post_office\":\"Demo Post Office\",\"police_station\":\"Demo Police Station\",\"pin_code\":\"741248\",\"district\":\"Demo District\",\"state\":\"Demo State\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}');
 
 --
 -- Indexes for dumped tables
@@ -359,7 +361,7 @@ ALTER TABLE `present_addresses`
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
