@@ -368,10 +368,8 @@ class Teachers extends Controller
       $data = [
         'email' => '',
         'password' => '',
-        'confirm_password' => '',
         'email_err' => '',
         'password_err' => '',
-        'confirm_password_err' => ''
       ];
 
       // Load view
