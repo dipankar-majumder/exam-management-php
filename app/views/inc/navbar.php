@@ -20,17 +20,20 @@
       <ul class="navbar-nav ml-auto">
         <?php if (isset($_SESSION['teacher_id'])) : ?>
           <li class="nav-item">
-            <div>Welocme <?php $_SESSION['teacher_name'] ?></div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/teachers/logout">Log Out</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/teachers/logout">
+              Log Out
+            </a>
           </li>
         <?php else : ?>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/teachers/register">Register</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/teachers/register">
+              Register
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/teachers/login">Log In</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/teachers/login">
+              Log In
+            </a>
           </li>
         <?php endif; ?>
       </ul>
