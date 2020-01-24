@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2020 at 02:11 PM
+-- Generation Time: Jan 24, 2020 at 02:16 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `exam_management`
 --
+CREATE DATABASE IF NOT EXISTS `exam_management` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `exam_management`;
 
 -- --------------------------------------------------------
 
