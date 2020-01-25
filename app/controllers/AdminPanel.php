@@ -1,5 +1,5 @@
 <?php
-class CP extends Controller
+class AdminPanel extends Controller
 {
   private $adminModel;
   public function __construct()
