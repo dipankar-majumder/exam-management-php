@@ -8,7 +8,8 @@
 <script src="<?php echo URLROOT; ?>/js/bootstrap.js"></script>
 <script src="<?php echo URLROOT; ?>/js/main.js"></script>
 <script src="<?php echo URLROOT; ?>/js/fillDetails.js"></script>
-<script src="<?php echo URLROOT; ?>/icons/index.js"></script>
+<script src="<?php echo URLROOT; ?>/icons/ionicons/index.js"></script>
+<script src="<?php echo URLROOT; ?>/icons/ionicons/index.mjs"></script>
 </body>
 
 </html>
