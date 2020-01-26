@@ -73,9 +73,9 @@ class Admin extends Controller
 
   public function index()
   {
-    if (empty($_SESSION['admin_id'])) {
-      redirect('admin/login');
-    }
+    // if (empty($_SESSION['admin_id'])) {
+    //   redirect('admin/login');
+    // }
     $this->view('admin/index');
   }
 
