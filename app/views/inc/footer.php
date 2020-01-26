@@ -14,6 +14,9 @@
 <script src="<?php echo URLROOT; ?>/js/dashboard.js"></script>
 <script src="<?php echo URLROOT; ?>/js/feather.min.js"></script>
 <script src="<?php echo URLROOT; ?>/js/jquery-3.4.1.slim.min.js"></script>
+<script src="<?php echo URLROOT; ?>/js/solid.js"></script>
+<script src="<?php echo URLROOT; ?>/js/fontawesome.js"></script>
+<script src="<?php echo URLROOT; ?>/js/jquery.mCustomScrollbar.concat.min.js"></script>
 </body>
 
 </html>
