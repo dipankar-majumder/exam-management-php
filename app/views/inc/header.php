@@ -14,7 +14,11 @@
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/fontawesome.css">
   <!-- Custom CSS File -->
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">
+<<<<<<< HEAD
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/floating-labels.css">
+=======
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/jquery.mCustomScrollbar.min.css">
+>>>>>>> 3ee9f79fdb090a3aa63d24af7860acd27944314c
   <title><?php echo SITENAME; ?></title>
 </head>
 

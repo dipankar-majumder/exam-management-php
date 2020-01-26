@@ -3,15 +3,29 @@
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> -->
-<script src="<?php echo URLROOT; ?>/js/jquery-3.4.1.js"></script>
+<!--<script src="--><?php //echo URLROOT; ?><!--/js/jquery-3.4.1.js"></script>-->
 <script src="<?php echo URLROOT; ?>/js/popper.min.js"></script>
 <script src="<?php echo URLROOT; ?>/js/bootstrap.js"></script>
+<<<<<<< HEAD
 <!-- IonIcons -->
 <script src="<?php echo URLROOT; ?>/icons/ionicons/index.js"></script>
 <script src="<?php echo URLROOT; ?>/icons/ionicons/index.mjs"></script>
 <!-- Custom JavaScript Files -->
 <script src="<?php echo URLROOT; ?>/js/main.js"></script>
 <script src="<?php echo URLROOT; ?>/js/fillDetails.js"></script>
+=======
+<script src="<?php echo URLROOT; ?>/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo URLROOT; ?>/js/main.js"></script>
+<script src="<?php echo URLROOT; ?>/js/fillDetails.js"></script>
+<script src="<?php echo URLROOT; ?>/icons/ionicons/index.js"></script>
+<script src="<?php echo URLROOT; ?>/icons/ionicons/index.mjs"></script>
+<script src="<?php echo URLROOT; ?>/js/dashboard.js"></script>
+<script src="<?php echo URLROOT; ?>/js/feather.min.js"></script>
+<script src="<?php echo URLROOT; ?>/js/jquery-3.4.1.slim.min.js"></script>
+<script src="<?php echo URLROOT; ?>/js/solid.js"></script>
+<script src="<?php echo URLROOT; ?>/js/fontawesome.js"></script>
+<script src="<?php echo URLROOT; ?>/js/jquery.mCustomScrollbar.concat.min.js"></script>
+>>>>>>> 3ee9f79fdb090a3aa63d24af7860acd27944314c
 </body>
 
 </html>
