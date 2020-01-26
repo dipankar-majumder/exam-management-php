@@ -48,6 +48,7 @@ class Admin extends Controller
         empty($data['password_err']) &&
         empty($data['confirm_password_err'])
       ) {
+        // DE🐞
         echo "login";
         exit;
         session_start();
@@ -55,6 +56,7 @@ class Admin extends Controller
         $_SESSION['admin_email'] = $admin->email;
         redirect('admin');
       } else {
+        // Load view with error
         $this->view('admin/login', $data);
       }
     } else {

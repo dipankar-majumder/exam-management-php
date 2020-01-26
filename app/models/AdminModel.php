@@ -13,6 +13,7 @@ class AdminModel
       WHERE email=:email
       LIMIT 1'
     );
+    $this->db->bind(':email', $email);
     $row = $this->db->single();
     return $row;
   }
