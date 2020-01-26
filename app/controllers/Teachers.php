@@ -384,6 +384,9 @@ class Teachers extends Controller
   }
   public function index()
   {
+    if (empty($_SESSION['teacher_id'])) {
+      redirect('teachers/login');
+    }
     $this->view('teachers/index');
   }
   public function logout()

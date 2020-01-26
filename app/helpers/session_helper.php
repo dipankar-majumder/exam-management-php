@@ -33,3 +33,15 @@ function flash(
     }
   }
 }
+
+function isLoggedIn($type)
+{
+  switch ($type) {
+    case 'admin':
+      return isset($_SESSION['admin_id']);
+    case 'teacher':
+      return isset($_SESSION['teacher_id']);
+    default:
+      return null;
+  }
+}

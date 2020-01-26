@@ -6,10 +6,12 @@
 <script src="<?php echo URLROOT; ?>/js/jquery-3.4.1.js"></script>
 <script src="<?php echo URLROOT; ?>/js/popper.min.js"></script>
 <script src="<?php echo URLROOT; ?>/js/bootstrap.js"></script>
-<script src="<?php echo URLROOT; ?>/js/main.js"></script>
-<script src="<?php echo URLROOT; ?>/js/fillDetails.js"></script>
+<!-- IonIcons -->
 <script src="<?php echo URLROOT; ?>/icons/ionicons/index.js"></script>
 <script src="<?php echo URLROOT; ?>/icons/ionicons/index.mjs"></script>
+<!-- Custom JavaScript Files -->
+<script src="<?php echo URLROOT; ?>/js/main.js"></script>
+<script src="<?php echo URLROOT; ?>/js/fillDetails.js"></script>
 </body>
 
 </html>
