@@ -20,6 +20,13 @@ class Teacher
     return $row;
   }
 
+  public function findAllTeachers(){
+    $this->db->query(
+      'SELECT * FROM teachers'
+    );
+    return $this->db->resultSet();
+  }
+
   // Register teacher
   public function register($data)
   {
