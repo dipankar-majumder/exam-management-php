@@ -1,4 +1,4 @@
-<div class="sideMenu bg-mattBlackLight">
+<div class="sideMenu shadow">
   <div class="sidebar">
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -47,10 +47,10 @@
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link px-2 sideMenuToggler">
-          <i class="material-icons icon expandView ">
-            view_list
+          <i class="material-icons icon expandView">
+            arrow_back
           </i>
-          <span class="text">Resize</span>
+          <span class="text">Hide</span>
         </a>
       </li>
     </ul>

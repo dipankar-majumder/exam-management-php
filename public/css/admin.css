@@ -1,51 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:400,600,700");
-@import url("https://fonts.googleapis.com/css?family=Courgette");
-.bg-mattBlackLight {
-  background-color: #303337;
-}
-
-.text-mattBlackLight {
-  color: #303337;
-}
-
-.bg-mattBlackDark, body, .nav-link:hover, .nav-link.active {
-  background-color: #212121;
-}
-
-.text-mattBlackDark {
-  color: #212121;
-}
-
-.bg-mattGray {
-  background-color: #878d8d;
-}
-
-.text-mattGray, body, .nav-link .icon, .nav-link .text {
-  color: #878d8d;
-}
-
-.bg-mattRed {
-  background-color: #ec6271;
-}
-
-.text-mattRed, .nav-link:hover .icon,
-.nav-link:hover .text, .nav-link.active .icon,
-.nav-link.active .text {
-  color: #ec6271;
-}
-
-* {
-  font-family: 'Poppins', sans-serif;
-}
-
-body {
-  height: 1000px;
-}
-
-.wrapper {
-  margin-top: 3.5rem;
-}
-
 .wrapper .sideMenu {
   position: fixed;
   top: 0;
@@ -99,6 +51,14 @@ body {
 
 .nav-link .text {
   font-size: 0.875rem;
+}
+
+.nav-link:hover .icon,
+.nav-link:hover .text, .nav-link.active .icon,
+.nav-link.active .text {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
 }
 
 @media (min-width: 992px) {

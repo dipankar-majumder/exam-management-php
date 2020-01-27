@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark mb-3">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark">
   <button class="navbar-toggler sideMenuToggler" type="button">
     <span class="navbar-toggler-icon"></span>
   </button>
