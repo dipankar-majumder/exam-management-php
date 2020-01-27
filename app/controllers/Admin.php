@@ -73,6 +73,14 @@ class Admin extends Controller
     }
   }
 
+  public function logout()
+  {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+      session_destroy();
+      redirect('');
+    }
+  }
+
   public function index()
   {
     // if (empty($_SESSION['admin_id'])) {
@@ -81,11 +89,8 @@ class Admin extends Controller
     $this->view('admin/index');
   }
 
-  public function logout()
+  public function dashboard()
   {
-    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-      session_destroy();
-      redirect('');
-    }
+    $this->view('admin/dashboard');
   }
 }

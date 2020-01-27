@@ -10,6 +10,7 @@
 <script src="<?php echo URLROOT; ?>/icons/ionicons/index.mjs"></script>
 <!-- Custom JavaScript Files -->
 <script src="<?php echo URLROOT; ?>/js/main.js"></script>
+<script src="<?php echo URLROOT; ?>/js/admin.js"></script>
 </body>
 
 </html>
