@@ -14,7 +14,8 @@
   <!-- Custom CSS File -->
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/bootstrap.css">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin.css">
-  <title><?php echo SITENAME; ?></title>
+  <!-- <title><?php echo SITENAME; ?></title> -->
+  <title><?php echo isset($data['html_title']) ? $data['html_title'] : SITENAME; ?></title>
 </head>
 
 <body>

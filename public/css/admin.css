@@ -53,6 +53,10 @@
   font-size: 0.875rem;
 }
 
+.nav-link:hover, .nav-link.active {
+  background-color: #ddd;
+}
+
 .nav-link:hover .icon,
 .nav-link:hover .text, .nav-link.active .icon,
 .nav-link.active .text {

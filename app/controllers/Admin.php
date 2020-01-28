@@ -2,9 +2,13 @@
 class Admin extends Controller
 {
   private $adminModel;
+  private $teacherModel;
+  private $examModel;
   public function __construct()
   {
+    // $this->model() arguments same as filename of APPROOT . '/models/' folders
     $this->adminModel = $this->model('AdminModel');
+    $this->teacherModel = $this->model('Teacher');
   }
 
   public function login()
@@ -77,13 +81,14 @@ class Admin extends Controller
   {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       session_destroy();
-      redirect('');
+      redirect('admin/login');
     }
   }
 
   public function index()
   {
-    // if (empty($_SESSION['admin_id'])) {
+    // Check Auth
+    // if (!isLoggedIn('teacher')) {
     //   redirect('admin/login');
     // }
     $this->view('admin/index');
@@ -92,5 +97,27 @@ class Admin extends Controller
   public function dashboard()
   {
     $this->view('admin/dashboard');
+  }
+
+  public function teachers()
+  {
+    $teachers = $this->teacherModel->findAllTeachers();
+    $data = array(
+      'html_title' => 'Teachers',
+      'teachers' => $teachers
+    );
+    $this->view('admin/teachers', $data);
+  }
+
+  public function exams()
+  {
+    $data = array(
+      'html_title' => 'Teachers',
+    );
+    $this->view('admin/exams', $data);
+  }
+
+  public function addExam()
+  {
   }
 }

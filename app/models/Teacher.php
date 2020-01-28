@@ -7,6 +7,15 @@ class Teacher
     $this->db = new Database;
   }
 
+  // Find All Teachers
+  public function findAllTeachers()
+  {
+    $this->db->query(
+      'SELECT * FROM teachers'
+    );
+    return $this->db->resultSet();
+  }
+
   // Find Teacher By Email
   public function findTeacherByEmail($email)
   {
@@ -18,13 +27,6 @@ class Teacher
     $this->db->bind(':email', $email);
     $row = $this->db->single();
     return $row;
-  }
-
-  public function findAllTeachers(){
-    $this->db->query(
-      'SELECT * FROM teachers'
-    );
-    return $this->db->resultSet();
   }
 
   // Register teacher

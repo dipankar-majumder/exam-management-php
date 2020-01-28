@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2020 at 08:04 PM
+-- Generation Time: Jan 28, 2020 at 06:23 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -145,6 +145,17 @@ INSERT INTO `educational_qualifications` (`id`, `qualification`) VALUES
 (7, 'M. Phil.'),
 (8, 'Ph. D.'),
 (9, 'Post Doctoral');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exams`
+--
+
+CREATE TABLE `exams` (
+  `id` int(11) NOT NULL,
+  `name` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -305,6 +316,12 @@ ALTER TABLE `educational_qualifications`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `exams`
+--
+ALTER TABLE `exams`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `genders`
 --
 ALTER TABLE `genders`
@@ -367,6 +384,12 @@ ALTER TABLE `designations`
 --
 ALTER TABLE `educational_qualifications`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `exams`
+--
+ALTER TABLE `exams`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `genders`

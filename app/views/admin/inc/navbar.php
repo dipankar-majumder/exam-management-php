@@ -13,15 +13,15 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle p-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="material-icons icon">
-            person
+            account_circle
           </i>
-          <span class="text">Account</span>
+          <!-- <span class="text">Account</span> -->
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Action</a>
           <a class="dropdown-item" href="#">Another action</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="<?php echo URLROOT; ?>/admin/logout">Log Out</a>
         </div>
       </li>
     </ul>

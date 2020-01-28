@@ -79,6 +79,7 @@ $margin-top: 56px;
   &:hover,
   &.active {
     // @extend .bg-mattBlackDark;
+    background-color: #ddd;
     .icon,
     .text {
       justify-content: start;

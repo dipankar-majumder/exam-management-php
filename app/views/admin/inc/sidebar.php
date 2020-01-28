@@ -10,16 +10,24 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link px-2">
+        <a href="<?php echo URLROOT; ?>/admin/exams" class="nav-link px-2">
           <i class="material-icons icon">
-            person
+            assignment
           </i>
-          <span class="text">User Profile</span>
+          <span class="text">Exams</span>
         </a>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link px-2">
-          <i class="material-icons icon"> insert_chart </i><span class="text">Charts</span></a>
+          <i class="material-icons icon">
+            person
+          </i>
+          <span class="text">Teachers</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link px-2">
+          <i class="material-icons icon">insert_chart</i><span class="text">Charts</span></a>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link px-2">
