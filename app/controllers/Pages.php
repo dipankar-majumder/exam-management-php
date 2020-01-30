@@ -30,4 +30,8 @@ class Pages extends Controller
 
     $this->view('pages/about', $data);
   }
+  public function test()
+  {
+    $this->view('pages/test');
+  }
 }

@@ -57,6 +57,10 @@ $margin-top: 56px;
   }
 }
 
+.material-icons {
+  vertical-align: middle;
+}
+
 .nav-link {
   align-items: center;
   display: block;
@@ -88,7 +92,7 @@ $margin-top: 56px;
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .wrapper {
     .sideMenu {
       transform: translateX(0);
@@ -114,4 +118,9 @@ $margin-top: 56px;
       }
     }
   }
+}
+
+// Table Row href
+tr[data-href] {
+  cursor: pointer;
 }

@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark mb-3">
+<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark mb-3">
   <div class="container">
     <a class="navbar-brand" href="<?php echo URLROOT; ?>">
       <img src="<?php echo URLROOT; ?>/images/UE%20Logo-01_1.png" width="35" height="35" class="d-inline-block align-top" alt="">
@@ -26,13 +26,17 @@
           </li>
         <?php else : ?>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/teachers/register">
-              Register
+            <a class="nav-link" href="<?php echo URLROOT; ?>/teachers">
+              <div class="btn btn-sm btn-primary">
+                Teachers Panel
+              </div>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/teachers/login">
-              Log In
+            <a class="nav-link" href="<?php echo URLROOT; ?>/admin">
+              <div class="btn btn-sm btn-primary">
+                Admin Panel
+              </div>
             </a>
           </li>
         <?php endif; ?>

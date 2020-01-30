@@ -30,7 +30,7 @@ class Teacher
   }
 
   // Register teacher
-  public function register($data)
+  public function register($teacher)
   {
     $this->db->query(
       'INSERT INTO teachers (
@@ -44,9 +44,9 @@ class Teacher
       )'
     );
     // Bind values into query
-    $this->db->bind(':email', $data['email']);
-    $this->db->bind(':password', $data['password']);
-    $this->db->bind(':email_verification_code', $data['email_verification_code']);
+    $this->db->bind(':email', $teacher['email']);
+    $this->db->bind(':password', $teacher['password']);
+    $this->db->bind(':email_verification_code', $teacher['email_verification_code']);
 
     // Execute
     if ($this->db->execute()) {

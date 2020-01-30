@@ -154,7 +154,7 @@ class Teachers extends Controller
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // Sanitize POST Data
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-      print('<pre>' . print_r($_POST, true) . '</pre');
+      print('<pre>' . print_r($_POST, true) . '</pre>');
       // Init data
       $data = array(
         'name'                                => trim($_POST['name']),

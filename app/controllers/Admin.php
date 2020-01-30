@@ -9,6 +9,7 @@ class Admin extends Controller
     // $this->model() arguments same as filename of APPROOT . '/models/' folders
     $this->adminModel = $this->model('AdminModel');
     $this->teacherModel = $this->model('Teacher');
+    $this->examModel = $this->model('Exam');
   }
 
   public function login()
@@ -32,7 +33,7 @@ class Admin extends Controller
         $data['email_err'] = 'Please enter email';
       } else if (!$admin) {
         // Check existance of teacher
-        $data['email_err'] = 'Email is not registered';
+        $data['email_err'] = 'Wrong Email';
       }
 
       // Validate Password
@@ -53,12 +54,12 @@ class Admin extends Controller
         empty($data['confirm_password_err'])
       ) {
         // DE🐞
-        echo "login";
-        exit;
+        // echo "login";
+        // exit;
         session_start();
         $_SESSION['admin_id'] = $admin->id;
         $_SESSION['admin_email'] = $admin->email;
-        redirect('admin');
+        redirect('admin/dashboard');
       } else {
         // Load view with error
         $this->view('admin/login', $data);
@@ -88,19 +89,28 @@ class Admin extends Controller
   public function index()
   {
     // Check Auth
-    // if (!isLoggedIn('teacher')) {
-    //   redirect('admin/login');
-    // }
-    $this->view('admin/index');
+    if (!isLoggedIn('admin')) {
+      redirect('admin/login');
+    }
+    // $this->view('admin/index');
+    redirect('admin/dashboard');
   }
 
   public function dashboard()
   {
+    // Check Auth
+    if (!isLoggedIn('admin')) {
+      redirect('admin/login');
+    }
     $this->view('admin/dashboard');
   }
 
   public function teachers()
   {
+    // Check Auth
+    if (!isLoggedIn('admin')) {
+      redirect('admin/login');
+    }
     $teachers = $this->teacherModel->findAllTeachers();
     $data = array(
       'html_title' => 'Teachers',
@@ -109,15 +119,93 @@ class Admin extends Controller
     $this->view('admin/teachers', $data);
   }
 
-  public function exams()
+  public function exams(...$params)
   {
-    $data = array(
-      'html_title' => 'Teachers',
-    );
-    $this->view('admin/exams', $data);
+    // $params = func_get_args();
+    // Check Auth
+    if (!isLoggedIn('admin')) {
+      redirect('admin/login');
+    }
+
+    if (empty($params)) {
+      $exams = $this->examModel->findAllExams();
+      $data = array(
+        'html_title' => 'Exams',
+        'exams' => $exams
+      );
+      $this->view('admin/exams', $data);
+    } else {
+      if ($params[0] == 'addExam') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+          if (empty($params[1])) {
+            $exam = array(
+              'name' => $_POST['name']
+            );
+            if ($this->examModel->addExam($exam)) {
+              redirect('admin/exams');
+            }
+          }
+        } else {
+          // $_SERVER['REQUEST_METHOD'] == 'GET'
+          $this->view('admin/addExam');
+        }
+      } elseif ($params[0] == 'exam') {
+        if (empty($params[1])) {
+          print('<pre>' . print_r($params, true) . '</pre>');
+        }
+      } elseif (is_numeric($params[0])) {
+        $data = array(
+          'exam' => array(
+            'id' => (int) $params[0]
+          )
+        );
+        $exam = $this->examModel->findExamById($data['exam']['id']);
+        $data['exam'] = $exam;
+        $this->view('admin/exam', $data);
+      }
+    }
   }
 
-  public function addExam()
+  public function exam(...$params)
   {
+    // Check Auth
+    if (!isLoggedIn('admin')) {
+      redirect('admin/login');
+    }
+    // print('<pre>' . print_r($params, true) . '</pre>');
+    if (isset($params[0])) {
+      // Check exam/$params[0] is set to id
+      if (is_numeric($params[0])) {
+      } elseif ($params[0] == 'create') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+          if (empty($params[1])) {
+            $exam = array(
+              'name' => $_POST['name']
+            );
+            if ($this->examModel->addExam($exam)) {
+              redirect('admin/exams');
+            }
+          }
+        } else {
+          // $_SERVER['REQUEST_METHOD'] == 'GET'
+          $this->view('admin/createExam');
+        }
+      } elseif (
+        $params[0] == 'update' &&
+        isset($params[1])
+      ) {
+        print('<pre>' . print_r($params, true) . '</pre>');
+      } elseif (
+        $params[0] == 'delete' &&
+        isset($params[1]) &&
+        is_numeric($params[1]) &&
+        $_SERVER['REQUEST_METHOD'] == 'POST'
+      ) {
+        print('<pre>' . print_r($params, true) . '</pre>');
+      } else {
+      }
+    }
   }
 }
