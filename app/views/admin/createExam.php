@@ -10,8 +10,7 @@
               <div class="p-2">
                 <h4 class="mb-2">Add Exam</h4>
                 <div class="col-md-8 col-lg-6 col-xl-4 mx-auto my-2">
-                  <!-- <div class="mx-auto m-2"> -->
-                  <form class="" action="<?php echo URLROOT; ?>/admin/exams/createExam" method="post">
+                  <form action="<?php echo URLROOT; ?>/admin/exam/create" method="post">
                     <div class="form-label-group mb-3">
                       <input type="text" name="name" id="name" class="form-control" placeholder="Exam Name" required="" autofocus="">
                       <label for="name">Exam Name</label>
@@ -23,7 +22,6 @@
                       <span class="text">Create Exam</span>
                     </button>
                   </form>
-                  <!-- </div> -->
                 </div>
               </div>
             </div>

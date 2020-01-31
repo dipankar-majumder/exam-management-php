@@ -119,7 +119,7 @@ class Admin extends Controller
     $this->view('admin/teachers', $data);
   }
 
-  public function exams(...$params)
+  public function exams()
   {
     // $params = func_get_args();
     // Check Auth
@@ -127,44 +127,12 @@ class Admin extends Controller
       redirect('admin/login');
     }
 
-    if (empty($params)) {
-      $exams = $this->examModel->findAllExams();
-      $data = array(
-        'html_title' => 'Exams',
-        'exams' => $exams
-      );
-      $this->view('admin/exams', $data);
-    } else {
-      if ($params[0] == 'addExam') {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-          if (empty($params[1])) {
-            $exam = array(
-              'name' => $_POST['name']
-            );
-            if ($this->examModel->addExam($exam)) {
-              redirect('admin/exams');
-            }
-          }
-        } else {
-          // $_SERVER['REQUEST_METHOD'] == 'GET'
-          $this->view('admin/addExam');
-        }
-      } elseif ($params[0] == 'exam') {
-        if (empty($params[1])) {
-          print('<pre>' . print_r($params, true) . '</pre>');
-        }
-      } elseif (is_numeric($params[0])) {
-        $data = array(
-          'exam' => array(
-            'id' => (int) $params[0]
-          )
-        );
-        $exam = $this->examModel->findExamById($data['exam']['id']);
-        $data['exam'] = $exam;
-        $this->view('admin/exam', $data);
-      }
-    }
+    $exams = $this->examModel->findAllExams();
+    $data = array(
+      'html_title' => 'Exams',
+      'exams' => $exams
+    );
+    $this->view('admin/exams', $data);
   }
 
   public function exam(...$params)
@@ -175,36 +143,105 @@ class Admin extends Controller
     }
     // print('<pre>' . print_r($params, true) . '</pre>');
     if (isset($params[0])) {
-      // Check exam/$params[0] is set to id
-      if (is_numeric($params[0])) {
-      } elseif ($params[0] == 'create') {
+      if ($params[0] == 'create') {
+        // Create
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           if (empty($params[1])) {
             $exam = array(
               'name' => $_POST['name']
             );
-            if ($this->examModel->addExam($exam)) {
+            if ($this->examModel->createExam($exam)) {
+              flash(
+                'exam_action_status',
+                'Exam Created Successfully
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>',
+                'alert alert-success alert-dismissible fade show'
+              );
               redirect('admin/exams');
+            } else {
+              die('Something went wrong');
             }
           }
         } else {
           // $_SERVER['REQUEST_METHOD'] == 'GET'
           $this->view('admin/createExam');
         }
+      } elseif (is_numeric($params[0])) {
+        // Read
+        // Check exam/$params[0] is set to id
+        $data = array(
+          'exam' => array(
+            'id' => (int) $params[0]
+          )
+        );
+        $exam = $this->examModel->findExamById($data['exam']['id']);
+        $data['exam'] = $exam;
+        $this->view('admin/exam', $data);
       } elseif (
         $params[0] == 'update' &&
-        isset($params[1])
+        isset($params[1]) &&
+        is_numeric($params[1])
       ) {
-        print('<pre>' . print_r($params, true) . '</pre>');
+        // Update
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+          print('<pre>' . print_r($params, true) . '</pre>');
+          print('<pre>' . print_r($_POST, true) . '</pre>');
+          $exam = array(
+            'id' => $params[1],
+            'name' => $_POST['name']
+          );
+          print('<pre>' . print_r($exam, true) . '</pre>');
+          if ($this->examModel->updateExam($exam)) {
+            flash(
+              'exam_action_status',
+              'Exam Updated Successfully
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>',
+              'alert alert-success alert-dismissible fade show'
+            );
+            redirect('admin/exam/' . $params[1]);
+          }
+        } else {
+          // print('GET<pre>' . print_r($_GET, true) . '</pre>');
+          $data = array(
+            'html_title' => 'Update Exam',
+            'exam' => array(
+              'id' => (int) $params[1]
+            )
+          );
+          $data['exam'] = $this->examModel->findExamById($data['exam']['id']);
+          $this->view('admin/updateExam', $data);
+        }
       } elseif (
         $params[0] == 'delete' &&
         isset($params[1]) &&
         is_numeric($params[1]) &&
         $_SERVER['REQUEST_METHOD'] == 'POST'
       ) {
-        print('<pre>' . print_r($params, true) . '</pre>');
-      } else {
+        // print('<pre>' . print_r($params, true) . '</pre>');
+        $data = array(
+          'exam' => array(
+            'id' => (int) $params[1]
+          )
+        );
+        if ($this->examModel->deleteExam($data['exam']['id'])) {
+          flash(
+            'exam_action_status',
+            'Exam Deleted Successfully
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>',
+            'alert alert-success alert-dismissible fade show'
+          );
+          redirect('admin/exams');
+        } else {
+          die('Something Went Wrong');
+        }
       }
     }
   }

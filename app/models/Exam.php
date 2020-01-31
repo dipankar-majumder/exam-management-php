@@ -40,4 +40,26 @@ class Exam
     $this->db->bind(':name', $exam['name']);
     return $this->db->execute() ? true : false;
   }
+
+  public function updateExam($exam)
+  {
+    $this->db->query(
+      'UPDATE exams SET
+      name = :name
+      WHERE id = :id'
+    );
+    $this->db->bind(':name', $exam['name']);
+    $this->db->bind(':id', $exam['id']);
+    return $this->db->execute() ? true : false;
+  }
+
+  public function deleteExam($id)
+  {
+    $this->db->query(
+      'DELETE FROM exams
+      WHERE id = :id'
+    );
+    $this->db->bind(':id', $id);
+    return $this->db->execute() ? true : false;
+  }
 }

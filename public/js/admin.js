@@ -1,16 +1,16 @@
 $(document).ready(function() {
   $('.sideMenuToggler').on('click', function() {
-    console.log(
-      $(this)[0].className == 'navbar-toggler sideMenuToggler'
-        ? 'arrow_forword'
-        : 'arrow_back',
-    );
     $('.wrapper').toggleClass('active');
-    console.log($('.icon.expandView')[0].innerText);
-    $('.icon.expandView')[0].innerText != 'arrow_back'
-      ? ($('.icon.expandView')[0].innerText = 'arrow_back')
-      : ($('.icon.expandView')[0].innerText = 'arrow_forward');
+    $('.icon.expandView')[0].innerText =
+      $('.icon.expandView')[0].innerText != 'arrow_back'
+        ? 'arrow_back'
+        : 'arrow_forward';
   });
+
+  var initialHideIcon = function() {
+    $('.icon.expandView')[0].innerText =
+      $(window).width() < 768 ? 'arrow_forward' : 'arrow_back';
+  };
 
   var adjustSidebar = function() {
     $('.sidebar').slimScroll({
@@ -20,8 +20,10 @@ $(document).ready(function() {
   };
 
   adjustSidebar();
+  initialHideIcon();
   $(window).resize(function() {
     adjustSidebar();
+    initialHideIcon();
   });
 });
 
