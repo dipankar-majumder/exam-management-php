@@ -1,7 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <form class="form-signin" action="<?php echo URLROOT; ?>/admin/login" method="post">
   <div class="text-center mb-4">
-    <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Admin Login</h1>
     <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a></p>
   </div>
