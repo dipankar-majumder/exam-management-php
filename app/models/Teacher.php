@@ -29,6 +29,18 @@ class Teacher
     return $row;
   }
 
+  // Find Teacher By Email
+  public function findTeachersByDepartment($department)
+  {
+    $this->db->query(
+      'SELECT * FROM teachers
+      WHERE department=:department 
+      LIMIT 1'
+    );
+    $this->db->bind(':department', $department);
+    return $this->db->resultSet();
+  }
+
   // Register teacher
   public function register($teacher)
   {

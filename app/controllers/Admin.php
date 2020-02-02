@@ -148,9 +148,25 @@ class Admin extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           if (empty($params[1])) {
+            $teachers = $this->teacherModel->findAllTeachers();
             $exam = array(
-              'name' => $_POST['name']
+              'name' => $_POST['name'],
+              'semester' => $_POST['semester'],
+              'date' => $_POST['date'],
+              'subject' => $_POST['subject'],
+              'question_paper_setter' => null,
+              'hall_guard' => null,
+              'answer_paper_checker' => null,
             );
+
+            // Choose teacher for exam duty
+            $exam['question_paper_setter'] = $teachers[array_rand($teachers)]->id;
+            $exam['hall_guard'] = $teachers[array_rand($teachers)]->id;
+            $exam['answer_paper_checker'] = $teachers[array_rand($teachers)]->id;
+
+            // print('<pre>' . print_r($exam, true) . '</pre>');
+            // exit;
+
             if ($this->examModel->createExam($exam)) {
               flash(
                 'exam_action_status',
@@ -192,7 +208,10 @@ class Admin extends Controller
           print('<pre>' . print_r($_POST, true) . '</pre>');
           $exam = array(
             'id' => $params[1],
-            'name' => $_POST['name']
+            'name' => $_POST['name'],
+            'semester' => $_POST['semester'],
+            'date' => $_POST['date'],
+            'subject' => $_POST['subject'],
           );
           print('<pre>' . print_r($exam, true) . '</pre>');
           if ($this->examModel->updateExam($exam)) {

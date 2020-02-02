@@ -7,8 +7,10 @@
         <div class="row">
           <div class="col-12 my-3">
             <div class="shadow p-3">
+              <pre>
+                <?php print_r($data, true); ?>
+              </pre>
               <?php flash('exam_action_status') ?>
-              <!-- <?php print('<pre>' . print_r($data, true) . '</pre>'); ?> -->
               <div class="row p-2 align-items-center">
                 <h4 class="mb-2">Exam</h4>
                 <div class="ml-auto m-2 row align-items-center">

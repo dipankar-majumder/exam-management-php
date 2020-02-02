@@ -15,6 +15,27 @@
                       <input type="text" name="name" id="name" class="form-control" value="<?php echo $data['exam']->name; ?>" placeholder="Exam Name" required="" autofocus="">
                       <label for="name">Exam Name</label>
                     </div>
+                    <div class="form-group pr-3 mb-3 row">
+                      <label class="col" for="semester">Semester</label>
+                      <!-- <input type="text" name="name" id="name" class="form-control" placeholder="Exam Name" required="" autofocus=""> -->
+                      <select name="semester" class="col" id="semester">
+                        <option value="" <?php echo $data['exam']->semester == null ? 'selected' : '' ?> disabled>Select an option</option>
+                        <option value="1" <?php echo $data['exam']->semester == 1 ? 'selected' : '' ?>>1st Semester</option>
+                        <option value="2" <?php echo $data['exam']->semester == 2 ? 'selected' : '' ?>>2nd Semester</option>
+                        <option value="3" <?php echo $data['exam']->semester == 3 ? 'selected' : '' ?>>3rd Semester</option>
+                        <option value="4" <?php echo $data['exam']->semester == 4 ? 'selected' : '' ?>>4th Semester</option>
+                        <option value="5" <?php echo $data['exam']->semester == 5 ? 'selected' : '' ?>>5th Semester</option>
+                        <option value="6" <?php echo $data['exam']->semester == 6 ? 'selected' : '' ?>>6th Semester</option>
+                      </select>
+                    </div>
+                    <div class="form-label-group mb-3">
+                      <input type="date" name="date" id="date" class="form-control" placeholder="Date of Examination" value="<?php echo $data['exam']->date; ?>" required autofocus>
+                      <label for="date">Date of Examination</label>
+                    </div>
+                    <div class="form-label-group mb-3">
+                      <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject" value="<?php echo $data['exam']->subject; ?>" required>
+                      <label for="subject">Subject</label>
+                    </div>
                     <button class="btn btn-primary btn-block" type="submit">
                       <i class="material-icons">
                         add

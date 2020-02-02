@@ -15,12 +15,12 @@
     <label for="password">Password</label>
   </div>
 
-  <div class="checkbox mb-3">
+  <!-- <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me" disabled>Remember me
     </label>
-  </div>
+  </div> -->
   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  <p class="mt-5 mb-3 text-muted text-center">© 2017-2019</p>
+  <!-- <p class="mt-5 mb-3 text-muted text-center">© 2017-2019</p> -->
 </form>
 <?php require APPROOT . '/views/inc/footer.php'; ?>
