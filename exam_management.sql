@@ -3,11 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2020 at 07:13 PM
+-- Generation Time: Feb 02, 2020 at 07:32 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -31,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `additional_qualifications` (
   `id` int(11) NOT NULL,
   `qualification` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `additional_qualifications`
@@ -54,7 +53,7 @@ CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `admin`
@@ -72,7 +71,7 @@ INSERT INTO `admin` (`id`, `email`, `password`) VALUES
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `category` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `categories`
@@ -94,7 +93,7 @@ INSERT INTO `categories` (`id`, `category`) VALUES
 CREATE TABLE `designations` (
   `id` int(11) NOT NULL,
   `designation` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `designations`
@@ -127,7 +126,7 @@ INSERT INTO `designations` (`id`, `designation`) VALUES
 CREATE TABLE `educational_qualifications` (
   `id` int(11) NOT NULL,
   `qualification` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `educational_qualifications`
@@ -159,7 +158,7 @@ CREATE TABLE `exams` (
   `question_paper_setter` int(11) DEFAULT NULL,
   `hall_guard` int(11) DEFAULT NULL,
   `answer_paper_checker` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `exams`
@@ -178,7 +177,7 @@ INSERT INTO `exams` (`id`, `name`, `semester`, `date`, `subject`, `question_pape
 CREATE TABLE `genders` (
   `id` int(11) NOT NULL,
   `gender` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `genders`
@@ -198,7 +197,7 @@ INSERT INTO `genders` (`id`, `gender`) VALUES
 CREATE TABLE `pay_bands` (
   `id` int(11) NOT NULL,
   `band` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `pay_bands`
@@ -227,7 +226,7 @@ CREATE TABLE `permanent_addresses` (
   `pin_code` int(11) NOT NULL,
   `district` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 -- --------------------------------------------------------
 
@@ -245,7 +244,7 @@ CREATE TABLE `present_addresses` (
   `pin_code` int(255) NOT NULL,
   `district` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 -- --------------------------------------------------------
 
@@ -280,8 +279,8 @@ CREATE TABLE `teachers` (
   `pan_number` int(11) DEFAULT NULL,
   `mobile_number` int(11) UNSIGNED DEFAULT NULL,
   `date_of_superannuation` date DEFAULT NULL,
-  `addresses` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '{}'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `addresses` longtext DEFAULT '{}'
+) ;
 
 --
 -- Dumping data for table `teachers`
@@ -370,49 +369,49 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT for table `additional_qualifications`
 --
 ALTER TABLE `additional_qualifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `designations`
 --
 ALTER TABLE `designations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `educational_qualifications`
 --
 ALTER TABLE `educational_qualifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `exams`
 --
 ALTER TABLE `exams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `genders`
 --
 ALTER TABLE `genders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pay_bands`
 --
 ALTER TABLE `pay_bands`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `permanent_addresses`
@@ -430,7 +429,7 @@ ALTER TABLE `present_addresses`
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
