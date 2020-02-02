@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2020 at 06:46 AM
+-- Generation Time: Feb 02, 2020 at 07:32 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -151,8 +151,22 @@ INSERT INTO `educational_qualifications` (`id`, `qualification`) VALUES
 
 CREATE TABLE `exams` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `semester` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `subject` varchar(255) NOT NULL,
+  `question_paper_setter` int(11) DEFAULT NULL,
+  `hall_guard` int(11) DEFAULT NULL,
+  `answer_paper_checker` int(11) DEFAULT NULL
 ) ;
+
+--
+-- Dumping data for table `exams`
+--
+
+INSERT INTO `exams` (`id`, `name`, `semester`, `date`, `subject`, `question_paper_setter`, `hall_guard`, `answer_paper_checker`) VALUES
+(11, 'Computer Science Honours', 1, '2020-02-02', 'Computer Science', 1, 1, 4),
+(14, 'Exam One 1', 6, '2020-02-06', 'Computer Science', 1, 1, 4);
 
 -- --------------------------------------------------------
 
