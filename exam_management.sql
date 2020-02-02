@@ -279,7 +279,7 @@ CREATE TABLE `teachers` (
   `pan_number` int(11) DEFAULT NULL,
   `mobile_number` int(11) UNSIGNED DEFAULT NULL,
   `date_of_superannuation` date DEFAULT NULL,
-  `addresses` longtext DEFAULT '{}'
+  `addresses` longtext
 ) ;
 
 --
