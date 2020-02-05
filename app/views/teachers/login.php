@@ -19,7 +19,16 @@
           <input type="password" name="password" class="form-control form-control-lg <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>">
           <span class="invalid-feedback"><?php echo $data['password_err']; ?></span>
         </div>
-        <div class="row">
+          <div class="row">
+              <div class="col">
+          <img id="captcha" src="/securimage/securimage_show.php" alt="CAPTCHA Image" />
+              </div>
+                  <div class="col">
+          <input type="text" class="form-control" name="captcha_code" size="10" maxlength="6" />
+          [REFRESH] <a href="#" onclick="document.getElementById('captcha').src = '/securimage/securimage_show.php?' + Math.random(); return false"><img src="/securimage/images/refresh.png " height="25px" width="25px"></a>
+                  </div>
+                  </div>
+              <div class="row">
           <div class="col">
             <input type="submit" value="Login" class="btn btn-primary btn-block">
           </div>
@@ -27,7 +36,21 @@
             <a href="<?php echo URLROOT; ?>/teachers/register" class="btn btn-outline-secondary btn-block">No account? Register</a>
           </div>
         </div>
+          <?php
+          include_once $_SERVER['DOCUMENT_ROOT'] . '/securimage/securimage.php';
+          $securimage = new Securimage();
+          if ($securimage->check($_POST['captcha_code']) == false) {
+              // the code was incorrect
+              // you should handle the error so that the form processor doesn't continue
+
+              // or you can use the following code if there is no validation or you do not know how
+              echo "The security code entered was incorrect.<br /><br />";
+              echo "Please go <a href='javascript:history.go(-1)'>back</a> and try again.";
+              exit;
+          }
+          ?>
       </form>
+
     </div>
   </div>
 </div>
