@@ -8,7 +8,7 @@
           <div class="col-12 my-3">
             <div class="shadow p-3">
               <div class="p-2">
-                <h4 class="mb-2">Add Exam</h4>
+                <h4 class="mb-4">Create New Exam</h4>
                 <div class="col-md-8 col-lg-6 col-xl-4 mx-auto my-2">
                   <form action="<?php echo URLROOT; ?>/admin/exam/create" method="post">
                     <div class="form-label-group mb-3">
@@ -16,8 +16,16 @@
                       <label for="name">Exam Name</label>
                     </div>
                     <div class="form-group pr-3 mb-3 row">
-                      <label class="col" for="semester">Semester</label>
+                      <label class="col" for="type">Exam Type</label>
                       <!-- <input type="text" name="name" id="name" class="form-control" placeholder="Exam Name" required="" autofocus=""> -->
+                      <select name="type" class="col" id="type">
+                        <option value="" selected disabled>Select an option</option>
+                        <option>Theory</option>
+                        <option>Practical</option>
+                      </select>
+                    </div>
+                    <div class="form-group pr-3 mb-3 row">
+                      <label class="col" for="semester">Semester</label>
                       <select name="semester" class="col" id="semester">
                         <option value="" selected disabled>Select an option</option>
                         <option value="1">1st Semester</option>

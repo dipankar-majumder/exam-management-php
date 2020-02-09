@@ -154,17 +154,41 @@ class Admin extends Controller
               'semester' => $_POST['semester'],
               'date' => $_POST['date'],
               'subject' => $_POST['subject'],
-              'question_paper_setter' => null,
-              'hall_guard' => null,
-              'answer_paper_checker' => null,
+              'type' => $_POST['type'],
+              'duty' => array(),
             );
 
             // Choose teacher for exam duty
-            $exam['question_paper_setter'] = $teachers[array_rand($teachers)]->id;
-            $exam['hall_guard'] = $teachers[array_rand($teachers)]->id;
-            $exam['answer_paper_checker'] = $teachers[array_rand($teachers)]->id;
+            $randomTeachers = $teachers;
+            shuffle($randomTeachers);
+            print(json_encode(array_map(function ($randomTeacher) {
+              return $randomTeacher->id;
+            }, $randomTeachers)));
+            $exam['duty']['question_paper_setters'] = array();
+            array_push($exam['duty']['question_paper_setters'], (int) array_pop($randomTeachers)->id);
+            array_push($exam['duty']['question_paper_setters'], (int) array_pop($randomTeachers)->id);
+            if ($exam['type'] == 'Practical') {
+              $exam['duty']['externals'] = array();
+              // $exam['duty']['externals']['teacher'] = array();
+              // $exam['duty']['externals']['college'] = array();
+              // Number of Colleges
+              for ($i = 0; $i < 2; $i++) {
+                $exam['duty']['externals'][$i] = array();
+                // $exam['duty']['externals'][$i]['teacher'] = array();
+                // $exam['duty']['externals'][$i]['college'] = array();
+                // array_push($exam['duty']['externals'][$i]['teacher'], array_pop($randomTeachers)->id);
+                $exam['duty']['externals'][$i]['teacher'] = (int) array_pop($randomTeachers)->id;
+                $exam['duty']['externals'][$i]['college'] = null;
+              }
+            } elseif ($exam['type'] == 'Theory') {
+              $exam['duty']['answer_paper_checkers'] = array();
+              array_push($exam['duty']['answer_paper_checkers'], array_pop($randomTeachers)->id);
+              array_push($exam['duty']['answer_paper_checkers'], array_pop($randomTeachers)->id);
+            }
 
-            // print('<pre>' . print_r($exam, true) . '</pre>');
+            // Debug
+            // $exam = (object) $exam;
+            print('<pre>' . json_encode($exam, JSON_PRETTY_PRINT) . '</pre>');
             // exit;
 
             if ($this->examModel->createExam($exam)) {
@@ -195,7 +219,32 @@ class Admin extends Controller
         );
         $exam = $this->examModel->findExamById($data['exam']['id']);
         $data['exam'] = $exam;
-        $this->view('admin/exam', $data);
+        $data['exam']->duty = json_decode($data['exam']->duty);
+        if (empty($params[1])) {
+          // var_dump($data);
+          // return;
+          $this->view('admin/exam', $data);
+        } else {
+          if ($params[1] == 'questionPaperSetters') {
+            $data['questionPaperSetters'] = array();
+            foreach ($data['exam']->duty->question_paper_setters as $value) {
+              array_push($data['questionPaperSetters'], $this->teacherModel->findTeacherById($value));
+            }
+            $this->view('admin/questionPaperSetters', $data);
+          } elseif ($params[1] == 'answerPaperSetters') {
+            // In DEV mode
+            $this->view('admin/exam', $data);
+          } elseif ($params[1] == 'externals') {
+            $data['externals'] = array();
+            foreach ($data['exam']->duty->externals as $key => $value) {
+              $data['externals'][$key] = array();
+              $data['externals'][$key]['teacher'] = $this->teacherModel->findTeacherById($value->teacher);
+              $data['externals'][$key]['college'] = null;
+              $data['externals'][$key] = (object) $data['externals'][$key];
+            }
+            $this->view('admin/externals', $data);
+          }
+        }
       } elseif (
         $params[0] == 'update' &&
         isset($params[1]) &&

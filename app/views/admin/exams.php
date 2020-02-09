@@ -17,7 +17,7 @@
                     <i class="material-icons md-24">
                       add
                     </i>
-                    <span class="text">Add Exam</span>
+                    <span class="text">Create Exam</span>
                   </a>
                 </div>
               </div>

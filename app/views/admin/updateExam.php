@@ -17,7 +17,6 @@
                     </div>
                     <div class="form-group pr-3 mb-3 row">
                       <label class="col" for="semester">Semester</label>
-                      <!-- <input type="text" name="name" id="name" class="form-control" placeholder="Exam Name" required="" autofocus=""> -->
                       <select name="semester" class="col" id="semester">
                         <option value="" <?php echo $data['exam']->semester == null ? 'selected' : '' ?> disabled>Select an option</option>
                         <option value="1" <?php echo $data['exam']->semester == 1 ? 'selected' : '' ?>>1st Semester</option>
@@ -35,6 +34,14 @@
                     <div class="form-label-group mb-3">
                       <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject" value="<?php echo $data['exam']->subject; ?>" required>
                       <label for="subject">Subject</label>
+                    </div>
+                    <div class="form-group pr-3 mb-3 row">
+                      <label class="col" for="semester">Semester</label>
+                      <select name="semester" class="col" id="semester">
+                        <option value="" <?php echo $data['exam']->semester == null ? 'selected' : '' ?> disabled>Select an option</option>
+                        <option <?php echo $data['exam']->semester == 'Theory' ? 'selected' : '' ?>>Theory</option>
+                        <option <?php echo $data['exam']->semester == 'Practical' ? 'selected' : '' ?>>Practical</option>
+                      </select>
                     </div>
                     <button class="btn btn-primary btn-block" type="submit">
                       <i class="material-icons">

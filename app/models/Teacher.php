@@ -16,6 +16,17 @@ class Teacher
     return $this->db->resultSet();
   }
 
+  // Find Teacher By Id
+  public function findTeacherById($id)
+  {
+    $this->db->query(
+      'SELECT * FROM teachers
+      WHERE id = :id'
+    );
+    $this->db->bind(':id', $id);
+    return $this->db->single();
+  }
+
   // Find Teacher By Email
   public function findTeacherByEmail($email)
   {
@@ -40,6 +51,37 @@ class Teacher
     $this->db->bind(':department', $department);
     return $this->db->resultSet();
   }
+
+  // Find Question Paper Setters
+  // public function findQuestionPaperSettersByExam($exam)
+  // {
+  //   $questionPaperSetters = array();
+  //   $this->db->query(
+  //     'SELECT * FROM teachers
+  //     WHERE id = :id'
+  //   );
+  //   foreach ($exam->duty->question_paper_setters as $key => $value) {
+  //     $this->db->bind(':id', $value, PDO::PARAM_INT);
+  //     if ($this->db->execute()) {
+  //       array_push($questionPaperSetters, $this->db->single());
+  //     }
+  //   }
+  //   return $questionPaperSetters;
+  // }
+
+  // Find Externals
+  // public function findExternalsByExam($exam)
+  // {
+  //   $externals = array();
+  //   $this->db->query(
+  //     'SELECT * FROM teachers
+  //     WHERE id = :id'
+  //   );
+  //   foreach ($exam->duty->externals as $key => $value) {
+  //     echo $key;
+  //     print_r($value);
+  //   }
+  // }
 
   // Register teacher
   public function register($teacher)
@@ -132,7 +174,7 @@ class Teacher
     $this->db->bind(':pan_number', $data['pan_number']);
     $this->db->bind(':mobile_number', $data['mobile_number']);
     $this->db->bind(':date_of_superannuation', $data['date_of_superannuation']);
-    $this->db->bind(':addresses', json_encode($data['addresses']));
+    $this->db->bind(':addresses', json_encode($data['addresses'], JSON_FORCE_OBJECT));
     $this->db->bind(':email', $data['email']);
     echo $data['email'];
     if ($this->db->execute()) {

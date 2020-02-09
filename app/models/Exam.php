@@ -26,20 +26,22 @@ class Exam
       exams.semester,
       exams.date,
       exams.subject,
-      teacher1.name AS `Question Paper Setter`,
-      teacher2.name AS `Hall Guard`,
-      teacher3.name AS `Answer Paper Checker`
+      exams.type,
+      exams.duty
+      -- teacher1.name AS `Question Paper Setter`,
+      -- teacher2.name AS `Hall Guard`,
+      -- teacher3.name AS `Answer Paper Checker`
       FROM
         exams
-      INNER JOIN teachers AS teacher1
-      ON
-        exams.question_paper_setter = teacher1.id
-      INNER JOIN teachers AS teacher2
-      ON
-        exams.hall_guard = teacher2.id
-      INNER JOIN teachers AS teacher3
-      ON
-        exams.answer_paper_checker = teacher3.id
+      -- INNER JOIN teachers AS teacher1
+      -- ON
+      --   exams.question_paper_setter = teacher1.id
+      -- INNER JOIN teachers AS teacher2
+      -- ON
+      --   exams.hall_guard = teacher2.id
+      -- INNER JOIN teachers AS teacher3
+      -- ON
+      --   exams.answer_paper_checker = teacher3.id
       WHERE
         exams.id = :id'
     );
@@ -50,33 +52,41 @@ class Exam
   // Add Exam
   public function createExam($exam)
   {
+    // $this->db->query(
+    //   'INSERT INTO exam_duties (
+    //     exam,
+    //     teacher,
+    //     type,
+    //     college
+    //   )'
+    // );
     $this->db->query(
       'INSERT INTO exams (
         name,
         semester,
         date,
         subject,
-        question_paper_setter,
-        hall_guard,
-        answer_paper_checker
+        type,
+        duty
       ) VALUES (
         :name,
         :semester,
         :date,
         :subject,
-        :question_paper_setter,
-        :hall_guard,
-        :answer_paper_checker
+        :type,
+        :duty
       )'
     );
     $this->db->bind(':name', $exam['name']);
     $this->db->bind(':semester', $exam['semester']);
     $this->db->bind(':date', $exam['date']);
     $this->db->bind(':subject', $exam['subject']);
-    $this->db->bind(':question_paper_setter', $exam['question_paper_setter']);
-    $this->db->bind(':hall_guard', $exam['hall_guard']);
-    $this->db->bind(':answer_paper_checker', $exam['answer_paper_checker']);
-    return $this->db->execute() ? true : false;
+    $this->db->bind(':type', $exam['type']);
+    $this->db->bind(':duty', json_encode($exam['duty']), JSON_FORCE_OBJECT);
+    // $this->db->bind(':question_paper_setter', $exam['question_paper_setter']);
+    // $this->db->bind(':hall_guard', $exam['hall_guard']);
+    // $this->db->bind(':answer_paper_checker', $exam['answer_paper_checker']);
+    return $this->db->execute();
   }
 
   public function updateExam($exam)
@@ -94,7 +104,7 @@ class Exam
     $this->db->bind(':date', $exam['date']);
     $this->db->bind(':subject', $exam['subject']);
     $this->db->bind(':id', $exam['id']);
-    return $this->db->execute() ? true : false;
+    return $this->db->execute();
   }
 
   public function deleteExam($id)
@@ -104,6 +114,6 @@ class Exam
       WHERE id = :id'
     );
     $this->db->bind(':id', $id);
-    return $this->db->execute() ? true : false;
+    return $this->db->execute();
   }
 }
