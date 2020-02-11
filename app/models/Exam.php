@@ -116,4 +116,15 @@ class Exam
     $this->db->bind(':id', $id);
     return $this->db->execute();
   }
+
+  // DEV
+  public function allocateCollege($data)
+  {
+    // print('<pre>' . var_dump($data) . '</pre>');
+    // return false;
+    $this->db->query(
+      "UPDATE exams SET duty = JSON_SET(duty, '$.externals[{$data['external']['id']}].college', '{$data['external']['college']}') WHERE id = {$data['exam']->id}"
+    );
+    return $this->db->execute();
+  }
 }

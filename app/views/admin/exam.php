@@ -27,7 +27,7 @@
                   </form>
                 </div>
               </div>
-              <!-- <?php print('<pre>' . print_r($data['exam'], true) . '</pre>'); ?> -->
+              <!-- <?php print('<pre>' . print_r($data, true) . '</pre>'); ?> -->
               <div class="row p-3">
                 <?php foreach ($data['exam'] as $key => $value) : ?>
                   <?php if ($key != 'id') : ?>

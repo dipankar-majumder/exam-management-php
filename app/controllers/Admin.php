@@ -239,10 +239,41 @@ class Admin extends Controller
             foreach ($data['exam']->duty->externals as $key => $value) {
               $data['externals'][$key] = array();
               $data['externals'][$key]['teacher'] = $this->teacherModel->findTeacherById($value->teacher);
-              $data['externals'][$key]['college'] = null;
+              $data['externals'][$key]['college'] = $value->college;
               $data['externals'][$key] = (object) $data['externals'][$key];
             }
             $this->view('admin/externals', $data);
+          } elseif ($params[1] == 'external') {
+            if (!isset($params[2])) {
+            } else {
+              if (is_numeric($params[2])) {
+                if (empty($params[3])) {
+                  echo 'external/numeric';
+                } else {
+                  if ($params[3] == 'allocateCollege') {
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                      $data['external'] = array();
+                      $data['external']['id'] = (int) $params[2];
+                      $data['external']['college'] = $_POST['college'];
+                      if ($this->examModel->allocateCollege($data)) {
+                        redirect('admin/exam/' . $data['exam']->id . '/externals');
+                      } else {
+                        die('Something went wrong⚠');
+                      }
+                    } else {
+                      // $_SERVER['REQUEST_METHOD'] == 'GET';
+                      $data['external'] = array();
+                      $data['external']['id'] = $params[2];
+                      $data['external']['teacher'] = $this->teacherModel->findTeacherById($data['exam']->duty->externals[$params[2]]->teacher);
+                      $data['external']['college'] = $data['exam']->duty->externals[$params[2]]->college;
+                      $data['external'] = (object) $data['external'];
+                      $this->view('admin/allocateCollegeToExternals', $data);
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       } elseif (

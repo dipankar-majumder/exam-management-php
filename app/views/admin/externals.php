@@ -10,16 +10,20 @@
               <div class="row p-2 align-items-center">
                 <h4 class="mb-2">Externals</h4>
               </div>
-              <!-- <?php print('<pre>' . print_r($data, true) . '</pre>'); ?> -->
+              <?php print('<pre>' . print_r($data, true) . '</pre>'); ?>
               <div class="row p-3">
                 <div class="col-md-3 border rounded-lg m-0 p-2">Name</div>
                 <div class="col-md-3 border rounded-lg m-0 p-2">Email</div>
                 <div class="col-md-3 border rounded-lg m-0 p-2">College</div>
-                <?php foreach ($data['externals'] as $value) : ?>
+                <div class="col-md-3 border rounded-lg m-0 p-2">Action</div>
+                <?php foreach ($data['externals'] as $key => $value) : ?>
                   <div class="w-100"></div>
                   <div class="col-md-3 border rounded-lg m-0 p-2"><?php echo $value->teacher->name; ?></div>
                   <div class="col-md-3 border rounded-lg m-0 p-2"><?php echo $value->teacher->email; ?></div>
                   <div class="col-md-3 border rounded-lg m-0 p-2"><?php echo $value->college; ?></div>
+                  <div class="col-md-3 border rounded-lg m-0 p-2"><a href="<?php echo URLROOT; ?>/admin/exam/<?php echo $data['exam']->id; ?>/external/<?php echo $key; ?>/allocateCollege">
+                      <div class="btn btn-primary">Allocate College</div>
+                    </a></div>
                 <?php endforeach; ?>
               </div>
             </div>

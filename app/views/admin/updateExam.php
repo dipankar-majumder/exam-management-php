@@ -8,7 +8,7 @@
           <div class="col-12 my-3">
             <div class="shadow p-3">
               <div class="p-2">
-                <h4 class="mb-2">Add Exam</h4>
+                <h4 class="mb-2">Update Exam</h4>
                 <div class="col-md-8 col-lg-6 col-xl-4 mx-auto my-2">
                   <form action="<?php echo URLROOT; ?>/admin/exam/update/<?php echo $data['exam']->id; ?>" method="post" autocomplete="off">
                     <div class="form-label-group mb-3">
