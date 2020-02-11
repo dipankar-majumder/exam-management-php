@@ -12,7 +12,7 @@
                 <div class="col-md-8 col-lg-6 col-xl-4 mx-auto my-2">
                   <form action="<?php echo URLROOT; ?>/admin/exam/<?php echo $data['exam']->id; ?>/external/<?php echo $data['external']->id ?>/allocateCollege" method="post" autocomplete="off">
                     <div class="form-label-group mb-3">
-                      <input type="text" name="college" id="college" class="form-control" value="" placeholder="College Name" required="" autofocus="">
+                      <input type="text" name="college" id="college" class="form-control" value="<?php echo $data['external']->college; ?>" placeholder="College Name" required="" autofocus="">
                       <label for="college">College Name</label>
                     </div>
                     <button class="btn btn-primary btn-block" type="submit">
