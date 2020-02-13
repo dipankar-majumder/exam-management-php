@@ -20,33 +20,29 @@ class Exam
   public function findExamById($id)
   {
     $this->db->query(
-      'SELECT
-      exams.id,
-      exams.name,
-      exams.semester,
-      exams.date,
-      exams.subject,
-      exams.type,
-      exams.duty
-      -- teacher1.name AS `Question Paper Setter`,
-      -- teacher2.name AS `Hall Guard`,
-      -- teacher3.name AS `Answer Paper Checker`
-      FROM
-        exams
-      -- INNER JOIN teachers AS teacher1
-      -- ON
-      --   exams.question_paper_setter = teacher1.id
-      -- INNER JOIN teachers AS teacher2
-      -- ON
-      --   exams.hall_guard = teacher2.id
-      -- INNER JOIN teachers AS teacher3
-      -- ON
-      --   exams.answer_paper_checker = teacher3.id
-      WHERE
-        exams.id = :id'
+      'SELECT * FROM exams
+      WHERE exams.id = :id'
     );
     $this->db->bind(':id', $id, PDO::PARAM_INT);
     return $this->db->single();
+  }
+
+  // Find Exams By Teacher Id
+  public function findExamsByTeacherId($id)
+  {
+    $this->db->query(
+      'select *, json_search(duty, \'one\', :id) as duty_path from exams'
+    );
+    $this->db->bind(':id', $id);
+    if (!$this->db->execute()) {
+      die('Something Went Wrong');
+      return;
+    }
+    $exams = $this->db->resultSet();
+    $exams = array_filter($exams, function ($value, $key) {
+      return $key == 'duty_path' && $value != NULL;
+    }, ARRAY_FILTER_USE_BOTH);
+    return $exams;
   }
 
   // Add Exam

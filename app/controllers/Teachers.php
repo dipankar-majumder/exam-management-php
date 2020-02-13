@@ -1,9 +1,10 @@
 <?php
 class Teachers extends Controller
 {
-  private $teacherModel;
+  private $teacherModel, $examModel;
   public function __construct()
   {
+    $this->examModel = $this->model('Exam');
     $this->teacherModel = $this->model('Teacher');
   }
   public function register()
@@ -395,5 +396,69 @@ class Teachers extends Controller
       session_destroy();
       redirect('');
     }
+  }
+
+  public function questionPaper()
+  {
+    if (!isLoggedIn('teacher')) {
+      redirect('teachers/login');
+    }
+    $data = array();
+    $data['exams'] = $this->examModel->findExamsByTeacherId($_SESSION['teacher_id']);
+    $data['exams'] = array_filter($data['exams'], function ($value, $key) {
+      return strpos($value->duty_path, 'question_paper_setters') != false;
+    }, ARRAY_FILTER_USE_BOTH);
+    $this->view('teachers/questionPaper', $data);
+  }
+
+  public function external(...$params)
+  {
+    if (!isLoggedIn('teacher')) {
+      redirect('teachers/login');
+    }
+    if (!isset($params[0])) {
+      $data = array();
+      $data['exams'] = $this->examModel->findExamsByTeacherId($_SESSION['teacher_id']);
+      foreach ($data['exams'] as $key => $value) {
+        $data['exams'][$key]->duty = json_decode($data['exams'][$key]->duty);
+      }
+      $data['exams'] = array_filter($data['exams'], function ($value, $key) {
+        return strpos($value->duty_path, 'externals') != false;
+      }, ARRAY_FILTER_USE_BOTH);
+      $this->view('teachers/external', $data);
+    } else {
+      if (is_numeric($params[0])) {
+        if (!isset($params[1])) {
+        } else {
+          if ($params[1] == 'print') {
+            $data = array();
+            $data['teacher'] = $this->teacherModel->findTeacherById($_SESSION['teacher_id']);
+            $data['exam'] = $this->examModel->findExamById($params[0]);
+            $data['exam']->duty = json_decode($data['exam']->duty);
+            foreach ($data['exam']->duty->externals as $value) {
+              if ($value->teacher == $data['teacher']->id) {
+                $data['college'] = $value->college;
+                break;
+              }
+            }
+            $this->view('teachers/printDutyLetter', $data);
+          }
+        }
+      }
+    }
+  }
+
+  public function answerPaper()
+  {
+    if (!isLoggedIn('teacher')) {
+      redirect('teachers/login');
+    }
+    $data = array();
+    $data['exams'] = $this->examModel->findExamsByTeacherId($_SESSION['teacher_id']);
+    $data['exams'] = array_filter($data['exams'], function ($value, $key) {
+      // DEVMODE
+      return strpos($value->duty_path, 'answer_paper_checker') != false;
+    }, ARRAY_FILTER_USE_BOTH);
+    $this->view('teachers/external', $data);
   }
 }
