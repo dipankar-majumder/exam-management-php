@@ -48,14 +48,6 @@ class Exam
   // Add Exam
   public function createExam($exam)
   {
-    // $this->db->query(
-    //   'INSERT INTO exam_duties (
-    //     exam,
-    //     teacher,
-    //     type,
-    //     college
-    //   )'
-    // );
     $this->db->query(
       'INSERT INTO exams (
         name,
@@ -121,6 +113,21 @@ class Exam
     $this->db->query(
       "UPDATE exams SET duty = JSON_SET(duty, '$.externals[{$data['external']['id']}].college', '{$data['external']['college']}') WHERE id = {$data['exam']->id}"
     );
+    return $this->db->execute();
+  }
+  public function updateDuty($exam)
+  {
+    if (!is_array($exam)) {
+      die('[Exam.updateDuty()] $exam is not an array');
+    }
+    $this->db->query(
+      'UPDATE exams
+      SET
+      duty = :duty
+      WHERE id = :id'
+    );
+    $this->db->bind(':duty', json_encode($exam['duty']), JSON_FORCE_OBJECT);
+    $this->db->bind(':id', $exam['id']);
     return $this->db->execute();
   }
 }

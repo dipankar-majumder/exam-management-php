@@ -7,6 +7,8 @@ define('DB_NAME', 'exam_management');
 
 // App Root
 define('APPROOT', dirname(dirname(__FILE__)));
+// Uploads Root
+define('UPLOADSROOT', dirname(dirname(dirname(__FILE__))) . '/public/uploads');
 // URL Root
 define('URLROOT', 'http://localhost/exam-management-php');
 // Site Name

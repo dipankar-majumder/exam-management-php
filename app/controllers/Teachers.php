@@ -442,6 +442,36 @@ class Teachers extends Controller
               }
             }
             $this->view('teachers/printDutyLetter', $data);
+          } elseif ($params[1] == 'upload') {
+            $data = array();
+            $data['exam'] = $this->examModel->findExamById($params[0]);
+            $data['exam']->duty = json_decode($data['exam']->duty);
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+              $targetFile = sprintf(
+                "%s.%s",
+                time(),
+                preg_split('/\./', $_FILES['dutyLetter']['name'])[count(preg_split('/\./', $_FILES['dutyLetter']['name'])) - 1]
+              );
+              if (file_exists($targetFile)) {
+                die('File Exists⚠');
+              }
+              move_uploaded_file($_FILES['dutyLetter']['tmp_name'], UPLOADSROOT . '/' . $targetFile);
+              $data['exam']->duty->externals = array_map(function ($external, $targetFile) {
+                $external = (array) $external;
+                if ($external['teacher'] == $_SESSION['teacher_id']) {
+                  $external['upload'] = $targetFile;
+                }
+                return (object) $external;
+              }, $data['exam']->duty->externals, array_pad(array(), count($data['exam']->duty->externals), $targetFile));
+              if ($this->examModel->updateDuty((array) $data['exam'])) {
+                redirect('teachers/external');
+              } else {
+                die('Something Went Wrong⚠');
+              }
+            } else {
+              // $_SERVER['REQUEST_METHOD'] == 'GET'
+              $this->view('teachers/uploadDutyLetter', $data);
+            }
           }
         }
       }

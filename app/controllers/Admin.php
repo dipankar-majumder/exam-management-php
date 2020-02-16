@@ -240,6 +240,9 @@ class Admin extends Controller
               $data['externals'][$key] = array();
               $data['externals'][$key]['teacher'] = $this->teacherModel->findTeacherById($value->teacher);
               $data['externals'][$key]['college'] = $value->college;
+              if (isset($value->upload)) {
+                $data['externals'][$key]['upload'] = $value->upload;
+              }
               $data['externals'][$key] = (object) $data['externals'][$key];
             }
             $this->view('admin/externals', $data);
