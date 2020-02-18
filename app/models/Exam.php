@@ -40,7 +40,7 @@ class Exam
     }
     $exams = $this->db->resultSet();
     $exams = array_filter($exams, function ($value, $key) {
-      return $key == 'duty_path' && $value != NULL;
+      return $value->duty_path != null;
     }, ARRAY_FILTER_USE_BOTH);
     return $exams;
   }
