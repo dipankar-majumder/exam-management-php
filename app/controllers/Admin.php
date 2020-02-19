@@ -165,8 +165,11 @@ class Admin extends Controller
               return $randomTeacher->id;
             }, $randomTeachers)));
             $exam['duty']['question_paper_setters'] = array();
-            array_push($exam['duty']['question_paper_setters'], (int) array_pop($randomTeachers)->id);
-            array_push($exam['duty']['question_paper_setters'], (int) array_pop($randomTeachers)->id);
+            for ($i = 0; $i < 2; $i++) {
+              $exam['duty']['question_paper_setters'][$i] = array();
+              $exam['duty']['question_paper_setters'][$i]['teacher'] = (int) array_pop($randomTeachers)->id;
+            }
+            // print('<pre>' . print_r($exam, true) . '</pre>');
             if ($exam['type'] == 'Practical') {
               $exam['duty']['externals'] = array();
               // $exam['duty']['externals']['teacher'] = array();
@@ -188,7 +191,7 @@ class Admin extends Controller
 
             // Debug
             // $exam = (object) $exam;
-            print('<pre>' . json_encode($exam, JSON_PRETTY_PRINT) . '</pre>');
+            // print('<pre>' . json_encode($exam, JSON_PRETTY_PRINT) . '</pre>');
             // exit;
 
             if ($this->examModel->createExam($exam)) {
@@ -227,8 +230,14 @@ class Admin extends Controller
         } else {
           if ($params[1] == 'questionPaperSetters') {
             $data['questionPaperSetters'] = array();
-            foreach ($data['exam']->duty->question_paper_setters as $value) {
-              array_push($data['questionPaperSetters'], $this->teacherModel->findTeacherById($value));
+            foreach ($data['exam']->duty->question_paper_setters as $key => $value) {
+              $data['questionPaperSetters'][$key] = array();
+              $data['questionPaperSetters'][$key]['teacher'] = $this->teacherModel->findTeacherById($value->teacher);
+              // if (isset($value->questionPaper)) {
+              //   $data['questionPaperSetters'][$key]['questionPaper'] = $value->questionPaper;
+              // }
+              $data['questionPaperSetters'][$key]['questionPaper'] = isset($value->questionPaper) ? $value->questionPaper : null;
+              $data['questionPaperSetters'][$key] = (object) $data['questionPaperSetters'][$key];
             }
             $this->view('admin/questionPaperSetters', $data);
           } elseif ($params[1] == 'answerPaperSetters') {

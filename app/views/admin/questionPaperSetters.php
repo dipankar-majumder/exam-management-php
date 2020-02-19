@@ -11,16 +11,47 @@
                 <h4 class="mb-2">Question Paper Setters</h4>
               </div>
               <!-- <?php print('<pre>' . print_r($data, true) . '</pre>'); ?> -->
-              <div class="row p-3">
+              <!-- <div class="row p-3">
                 <div class="col-md-3 border rounded-lg m-0 p-2">name</div>
                 <div class="col-md-3 border rounded-lg m-0 p-2">email</div>
                 <?php foreach ($data['questionPaperSetters'] as $key => $value) : ?>
                   <div class="w-100"></div>
-                  <!-- <div class="col-md-4 border rounded-lg m-0 p-2"><?php echo $key; ?></div> -->
-                  <div class="col-md-3 border rounded-lg m-0 p-2"><?php echo $value->name; ?></div>
-                  <div class="col-md-3 border rounded-lg m-0 p-2"><?php echo $value->email; ?></div>
+                  <div class="col-md-3 border rounded-lg m-0 p-2"><?php echo $value->teacher->name; ?></div>
+                  <div class="col-md-3 border rounded-lg m-0 p-2"><?php echo $value->teacher->email; ?></div>
                 <?php endforeach; ?>
-              </div>
+              </div> -->
+              <table class="table table-responsive table-hover table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Question Paper</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($data['questionPaperSetters'] as $key => $value) : ?>
+                    <tr>
+                      <th scope="row">
+                        <?php echo $value->teacher->name; ?>
+                      </th>
+                      <td>
+                        <?php echo $value->teacher->email; ?>
+                      </td>
+                      <td>
+                        <a href="<?php echo URLROOT . '/uploads/' . $value->questionPaper; ?>">
+                          <?php echo $value->questionPaper; ?>
+                        </a>
+                      </td>
+                      <td>
+                        <a href="#">
+                          <div class="btn btn-primary">Aprove</div>
+                        </a>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

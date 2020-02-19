@@ -398,19 +398,58 @@ class Teachers extends Controller
     }
   }
 
-  public function questionPaper()
+  public function questionPaper(...$params)
   {
     if (!isLoggedIn('teacher')) {
       redirect('teachers/login');
     }
-    $data = array();
-    $data['exams'] = $this->examModel->findExamsByTeacherId($_SESSION['teacher_id']);
-    $data['exams'] = array_filter($data['exams'], function ($value, $key) {
-      return strpos($value->duty_path, 'question_paper_setters') != false;
-    }, ARRAY_FILTER_USE_BOTH);
-    $this->view('teachers/questionPaper', $data);
+    if (!isset($params[0])) {
+      $data = array();
+      $data['exams'] = $this->examModel->findExamsByTeacherId($_SESSION['teacher_id']);
+      foreach ($data['exams'] as $key => $value) {
+        $data['exams'][$key]->duty = json_decode($data['exams'][$key]->duty);
+      }
+      $data['exams'] = array_filter($data['exams'], function ($value, $key) {
+        return strpos($value->duty_path, 'question_paper_setters') != false;
+      }, ARRAY_FILTER_USE_BOTH);
+      $this->view('teachers/questionPaper', $data);
+    } else {
+      if (is_numeric($params[0])) {
+        if (!isset($params[1])) {
+        } else {
+          if ($params[1] == 'upload') {
+            $data = array();
+            $data['exam'] = $this->examModel->findExamById($params[0]);
+            $data['exam']->duty = json_decode($data['exam']->duty);
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+              $targetFile = sprintf(
+                "%s.%s",
+                time(),
+                preg_split('/\./', $_FILES['questionPaper']['name'])[count(preg_split('/\./', $_FILES['questionPaper']['name'])) - 1]
+              );
+              if (file_exists($targetFile)) {
+                die('File Exists⚠');
+              }
+              move_uploaded_file($_FILES['questionPaper']['tmp_name'], UPLOADSROOT . '/' . $targetFile);
+              $data['exam']->duty->question_paper_setters = array_map(function ($question_paper_setter, $targetFile) {
+                $question_paper_setter = (array) $question_paper_setter;
+                if ($question_paper_setter['teacher'] == $_SESSION['teacher_id']) {
+                  $question_paper_setter['questionPaper'] = $targetFile;
+                }
+                return (object) $question_paper_setter;
+              }, $data['exam']->duty->question_paper_setters, array_pad(array(), count($data['exam']->duty->question_paper_setters), $targetFile));
+              if ($this->examModel->updateDuty((array) $data['exam'])) {
+                redirect('teachers/questionPaper');
+              } else {
+                die('Something Went Wrong⚠');
+              }
+            } else {
+            }
+          }
+        }
+      }
+    }
   }
-
   public function external(...$params)
   {
     if (!isLoggedIn('teacher')) {
