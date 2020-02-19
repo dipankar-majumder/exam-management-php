@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2020 at 06:24 AM
+-- Generation Time: Feb 19, 2020 at 08:03 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -88,6 +88,18 @@ INSERT INTO `categories` (`id`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `colleges`
+--
+
+CREATE TABLE `colleges` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `subjects` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`subjects`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `designations`
 --
 
@@ -153,21 +165,34 @@ INSERT INTO `educational_qualifications` (`id`, `qualification`) VALUES
 CREATE TABLE `exams` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `semester` int(11) DEFAULT NULL,
-  `date` date DEFAULT NULL,
+  `semester` int(11) NOT NULL,
+  `date` date NOT NULL,
   `subject` varchar(255) NOT NULL,
-  `question_paper_setter` int(11) DEFAULT NULL,
-  `hall_guard` int(11) DEFAULT NULL,
-  `answer_paper_checker` int(11) DEFAULT NULL
+  `type` varchar(255) NOT NULL,
+  `duty` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`duty`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `exams`
 --
 
-INSERT INTO `exams` (`id`, `name`, `semester`, `date`, `subject`, `question_paper_setter`, `hall_guard`, `answer_paper_checker`) VALUES
-(11, 'Computer Science Honours', 1, '2020-02-02', 'Computer Science', 1, 1, 4),
-(14, 'Exam One 1 One', 4, '2020-02-06', 'Computer Science', 1, 1, 4);
+INSERT INTO `exams` (`id`, `name`, `semester`, `date`, `subject`, `type`, `duty`) VALUES
+(28, 'B. SC. 3 YEAR DEGREE', 1, '2020-02-19', 'Computer Science', 'Practical', '{\"question_paper_setters\":[{\"teacher\":7,\"questionPaper\":\"1582095377.pdf\"},{\"teacher\":4,\"questionPaper\":\"1582093967.pdf\"}],\"externals\":[{\"teacher\":1,\"college\":null},{\"teacher\":6,\"college\":null}]}'),
+(29, 'B. SC. 3 YEAR DEGREE', 2, '2020-02-19', 'Computer Science', 'Practical', '{\"question_paper_setters\":[{\"teacher\":7},{\"teacher\":1}],\"externals\":[{\"teacher\":6,\"college\":null},{\"teacher\":4,\"college\":null}]}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exam_duties`
+--
+
+CREATE TABLE `exam_duties` (
+  `id` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `exam` int(11) NOT NULL,
+  `teacher` int(11) NOT NULL,
+  `college` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -288,8 +313,11 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `email`, `email_verification_code`, `password`, `one_time_password`, `has_details`, `hrms_code`, `name`, `date_of_birth`, `highest_educational_qualification`, `additional_qualification`, `designation`, `department`, `gender`, `category`, `physically_handicapped`, `ex_service_man`, `exempted_category`, `date_of_joining_in_service`, `date_of_joining_in_present_college`, `pay_band`, `band_pay`, `grade_pay`, `pan_number`, `mobile_number`, `date_of_superannuation`, `addresses`) VALUES
-(1, 'teacher0@gmail.com', 'true', '$2y$10$Wsd67AHn42L336ZvbUJIvuSe6SMoHWnbjtJhMbM.pKU4RhtBi7BWu', '', 1, NULL, 'Teacher Zero', '2020-01-24', 'Post Doctoral', 'PG Diploma', 'Principal', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '2020-01-24', '2020-01-24', '37400-67000', 1, 1, 1, 4294967295, '2020-01-24', '{\"present_address\":{\"house_number\":\"1234\",\"location\":\"Example Street\",\"village\":\"Demo Village\",\"post_office\":\"Demo Post Office\",\"police_station\":\"Demo Police Station\",\"pin_code\":\"741248\",\"district\":\"Demo District\",\"state\":\"Demo State\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}'),
-(4, 'teacher1@gmail.com', 'true', '$2y$10$svj6cGfWK9booQ4Qc7grxu9vNvNcE1069XV2DDwGxgRBXkeVDpMci', NULL, 1, NULL, 'Teacher One', '2020-01-28', 'Post Doctoral', 'PG Diploma', 'Gr-D', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '2020-01-28', '2020-01-28', '37400-67000', 1, 1, 1, 4294967295, '2020-01-28', '{\"present_address\":{\"house_number\":\"1234\",\"location\":\"Street Name\",\"village\":\"Village\",\"post_office\":\"Post Office\",\"police_station\":\"Police Station\",\"pin_code\":\"000001\",\"district\":\"District\",\"state\":\"State\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"Street Name\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}');
+(1, 'teacher0@gmail.com', 'true', '$2y$10$Wsd67AHn42L336ZvbUJIvuSe6SMoHWnbjtJhMbM.pKU4RhtBi7BWu', NULL, 1, NULL, 'Teacher Zero', '2020-01-24', 'Post Doctoral', 'PG Diploma', 'Principal', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '2020-01-24', '2020-01-24', '37400-67000', 1, 1, 1, 4294967295, '2020-01-24', '{\"present_address\":{\"house_number\":\"1234\",\"location\":\"Example Street\",\"village\":\"Demo Village\",\"post_office\":\"Demo Post Office\",\"police_station\":\"Demo Police Station\",\"pin_code\":\"741248\",\"district\":\"Demo District\",\"state\":\"Demo State\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}'),
+(4, 'teacher1@gmail.com', 'true', '$2y$10$svj6cGfWK9booQ4Qc7grxu9vNvNcE1069XV2DDwGxgRBXkeVDpMci', NULL, 1, NULL, 'Teacher One', '2020-01-28', 'Post Doctoral', 'PG Diploma', 'Gr-D', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '2020-01-28', '2020-01-28', '37400-67000', 1, 1, 1, 4294967295, '2020-01-28', '{\"present_address\":{\"house_number\":\"1234\",\"location\":\"Street Name\",\"village\":\"Village\",\"post_office\":\"Post Office\",\"police_station\":\"Police Station\",\"pin_code\":\"000001\",\"district\":\"District\",\"state\":\"State\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"Street Name\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}'),
+(5, 'teacher2@gmail.com', 'true', '$2y$10$JVUF2F9IvY2KG9H9NzqrP.iQ/rA8T27Lemrwl2ffxfXd7AzyOCm6e', NULL, 1, NULL, 'Teacher Two', '0001-01-01', 'Hons. Graduate', '', 'Associate Professor', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '0001-01-01', '0001-01-01', '5400-25200', 1, 1, 1, 4294967295, '0001-01-01', '{\"present_address\":{\"house_number\":\"1342\",\"location\":\"Unknown\",\"village\":\"Unknown\",\"post_office\":\"Unknown\",\"police_station\":\"Unknown\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}'),
+(6, 'teacher3@gmail.com', 'true', '$2y$10$9j0yO./9d4DQJ60dDwpQUOtXdlSBC1xbZK6UeO6Q2NZGXxYFWwLQ.', NULL, 1, NULL, 'Teacher Three', '0001-01-01', 'Below Secondary', '', 'Principal', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '0001-01-01', '0001-01-01', '4900-16200', 1, 1, 1, 4294967295, '0001-01-01', '{\"present_address\":{\"house_number\":\"4321\",\"location\":\"Unknown\",\"village\":\"Unknown\",\"post_office\":\"Unknown\",\"police_station\":\"Unknown\",\"pin_code\":\"Unknown\",\"district\":\"Unknown\",\"state\":\"Unknown\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}'),
+(7, 'teacher4@gmail.com', 'true', '$2y$10$qJZvZHFjQyAg1UKvt3bBCu6rVwJSAJPqJG.Crs9vldSaL67XlBSGu', NULL, 1, NULL, 'Teacher Four', '0001-01-01', 'Post Doctoral', 'PG Diploma', 'Principal', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '0001-01-01', '0001-01-01', '37400-67000', 1, 1, 1, 4294967295, '0001-01-01', '{\"present_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}');
 
 --
 -- Indexes for dumped tables
@@ -315,6 +343,12 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `colleges`
+--
+ALTER TABLE `colleges`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `designations`
 --
 ALTER TABLE `designations`
@@ -330,6 +364,12 @@ ALTER TABLE `educational_qualifications`
 -- Indexes for table `exams`
 --
 ALTER TABLE `exams`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exam_duties`
+--
+ALTER TABLE `exam_duties`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -385,6 +425,12 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `colleges`
+--
+ALTER TABLE `colleges`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `designations`
 --
 ALTER TABLE `designations`
@@ -400,7 +446,13 @@ ALTER TABLE `educational_qualifications`
 -- AUTO_INCREMENT for table `exams`
 --
 ALTER TABLE `exams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `exam_duties`
+--
+ALTER TABLE `exam_duties`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `genders`
@@ -430,7 +482,7 @@ ALTER TABLE `present_addresses`
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
