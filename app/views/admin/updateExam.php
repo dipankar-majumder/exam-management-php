@@ -36,11 +36,11 @@
                       <label for="subject">Subject</label>
                     </div>
                     <div class="form-group pr-3 mb-3 row">
-                      <label class="col" for="semester">Semester</label>
-                      <select name="semester" class="col" id="semester">
-                        <option value="" <?php echo $data['exam']->semester == null ? 'selected' : '' ?> disabled>Select an option</option>
-                        <option <?php echo $data['exam']->semester == 'Theory' ? 'selected' : '' ?>>Theory</option>
-                        <option <?php echo $data['exam']->semester == 'Practical' ? 'selected' : '' ?>>Practical</option>
+                      <label class="col" for="type">Type</label>
+                      <select name="type" class="col" id="type">
+                        <option value="" <?php echo $data['exam']->type == null ? 'selected' : '' ?> disabled>Select an option</option>
+                        <option <?php echo $data['exam']->type == 'Theory' ? 'selected' : '' ?>>Theory</option>
+                        <option <?php echo $data['exam']->type == 'Practical' ? 'selected' : '' ?>>Practical</option>
                       </select>
                     </div>
                     <button class="btn btn-primary btn-block" type="submit">
