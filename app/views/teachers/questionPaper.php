@@ -12,7 +12,7 @@
         <td colspan="2">Empty</td>
       </tr>
     <?php endif; ?>
-    <!-- <?php print('<pre>' . print_r($data, true) . '</pre>') ?> -->
+    <?php print('<pre>' . print_r($data, true) . '</pre>') ?>
     <?php foreach ($data['exams'] as $key => $exam) : ?>
       <tr>
         <td><?php echo $exam->id; ?></td>

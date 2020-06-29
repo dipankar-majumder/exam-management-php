@@ -185,8 +185,12 @@ class Admin extends Controller
               }
             } elseif ($exam['type'] == 'Theory') {
               $exam['duty']['answer_paper_checkers'] = array();
-              array_push($exam['duty']['answer_paper_checkers'], array_pop($randomTeachers)->id);
-              array_push($exam['duty']['answer_paper_checkers'], array_pop($randomTeachers)->id);
+              // array_push($exam['duty']['answer_paper_checkers'], array_pop($randomTeachers)->id);
+              // array_push($exam['duty']['answer_paper_checkers'], array_pop($randomTeachers)->id);
+              for ($i = 0; $i < 2; $i++) {
+                $exam['duty']['answer_paper_checkers'][$i] = array();
+                $exam['duty']['answer_paper_checkers'][$i]['teacher'] = (int) array_pop($randomTeachers)->id;
+              }
             }
 
             // Debug
@@ -240,9 +244,18 @@ class Admin extends Controller
               $data['questionPaperSetters'][$key] = (object) $data['questionPaperSetters'][$key];
             }
             $this->view('admin/questionPaperSetters', $data);
-          } elseif ($params[1] == 'answerPaperSetters') {
+          } elseif ($params[1] == 'answerPaperCheckers') {
             // In DEV mode
-            $this->view('admin/exam', $data);
+            // print('<pre>' . print_r($data, true) . '</pre>');
+            // exit;
+            $data['answerPaperCheckers'] = array();
+            foreach($data['exam']->duty->answer_paper_checkers as $key => $value) {
+              $data['answerPaperCheckers'][$key] = array();
+              $data['answerPaperCheckers'][$key]['teacher'] = $this->teacherModel->findTeacherById($value->teacher);
+              $data['answerPaperCheckers'][$key]['answerPaperSubmissionSlip'] = isset($value->answerPaperSubmissionSlip) ? $value->answerPaperSubmissionSlip : null;
+              $data['answerPaperCheckers'][$key] = (object) $data['answerPaperCheckers'][$key];
+            }
+            $this->view('admin/answerPaperCheckers', $data);
           } elseif ($params[1] == 'externals') {
             $data['externals'] = array();
             foreach ($data['exam']->duty->externals as $key => $value) {

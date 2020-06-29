@@ -54,8 +54,8 @@
                   Question Paper Setters
                 </a>
                 <?php if ($data['exam']->type == 'Theory') : ?>
-                  <a href="<?php echo URLROOT; ?>/admin/exam/<?php echo $data['exam']->id; ?>/answerPaperSetters" class="col-md-2 shadow btn btn-large btn-lg btn-outline-primary">
-                    Answer Paper Setters
+                  <a href="<?php echo URLROOT; ?>/admin/exam/<?php echo $data['exam']->id; ?>/answerPaperCheckers" class="col-md-2 shadow btn btn-large btn-lg btn-outline-primary">
+                    Answer Paper Checkers
                   </a>
                 <?php endif; ?>
                 <?php if ($data['exam']->type == 'Practical') : ?>
