@@ -10,7 +10,7 @@
               <div class="row p-2 align-items-center">
                 <h4 class="mb-2">Question Paper Setters</h4>
               </div>
-              <!-- <?php print('<pre>' . print_r($data, true) . '</pre>'); ?> -->
+              <?php print('<pre>' . print_r($data, true) . '</pre>'); ?>
               <!-- <div class="row p-3">
                 <div class="col-md-3 border rounded-lg m-0 p-2">name</div>
                 <div class="col-md-3 border rounded-lg m-0 p-2">email</div>
@@ -26,7 +26,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Question Paper</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -44,9 +44,17 @@
                         </a>
                       </td>
                       <td>
-                        <a href="#">
+                        <!-- <a href="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/questionPaperSetter/<?php echo $key ?>/approve">
                           <div class="btn btn-primary">Aprove</div>
-                        </a>
+                        </a> -->
+                        <form action="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/questionPaperSetter/<?php echo $key ?>/approve" method="post">
+                          <input type="submit" class="btn btn-primary" value="<?php echo $value->approved ? 'Approved' : 'Approve'; ?>" <?php echo $value->approved ? 'disabled' : ''; ?> />
+                        </form>
+                      </td>
+                      <td>
+                        <form action="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/questionPaperSetter/<?php echo $key ?>/approve" method="post">
+                          <input type="submit" class="btn btn-primary" value="Pay" <?php echo $value->approved ? '' : 'disabled'; ?> />
+                        </form>
                       </td>
                     </tr>
                   <?php endforeach; ?>

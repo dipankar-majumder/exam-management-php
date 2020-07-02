@@ -115,10 +115,11 @@ class Exam
     );
     return $this->db->execute();
   }
+
   public function updateDuty($exam)
   {
     if (!is_array($exam)) {
-      die('[Exam.updateDuty()] $exam is not an array');
+      die('[Exam.updateDuty($exam)]: $exam is not an array');
     }
     $this->db->query(
       'UPDATE exams
@@ -129,5 +130,23 @@ class Exam
     $this->db->bind(':duty', json_encode($exam['duty']), JSON_FORCE_OBJECT);
     $this->db->bind(':id', $exam['id']);
     return $this->db->execute();
+  }
+
+  public function approve($data)
+  {
+    // DEV
+    // print('<pre>' . print_r($data['question_paper_setter'], true) . '</pre>');
+    // exit;
+    foreach (['question_paper_setter', 'answer_paper_checker', 'external'] as $key => $value) {
+      if (empty($data[$value])) {
+        continue;
+      }
+      // print("UPDATE exams SET duty = JSON_SET(duty, '$.{$value}s[{$data[$value]['id']}].approved', {$data[$value]['approved']}) WHERE id = {$data['exam']->id}");
+      // exit;
+      $this->db->query(
+        "UPDATE exams SET duty = JSON_SET(duty, '$.{$value}s[{$data[$value]['id']}].approved', {$data[$value]['approved']}) WHERE id = {$data['exam']->id}"
+      );
+      return $this->db->execute();
+    }
   }
 }

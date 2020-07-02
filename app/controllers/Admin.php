@@ -241,6 +241,7 @@ class Admin extends Controller
               //   $data['questionPaperSetters'][$key]['questionPaper'] = $value->questionPaper;
               // }
               $data['questionPaperSetters'][$key]['questionPaper'] = isset($value->questionPaper) ? $value->questionPaper : null;
+              $data['questionPaperSetters'][$key]['approved'] = isset($value->approved) ? $value->approved : null;
               $data['questionPaperSetters'][$key] = (object) $data['questionPaperSetters'][$key];
             }
             $this->view('admin/questionPaperSetters', $data);
@@ -268,34 +269,72 @@ class Admin extends Controller
               $data['externals'][$key] = (object) $data['externals'][$key];
             }
             $this->view('admin/externals', $data);
+          } elseif($params[1] == 'questionPaperSetter') {
+            if (!isset($params[2])) {
+            } elseif (is_numeric($params[2])) {
+              if (empty($params[3])) {
+                echo 'questionPaperSetter/numeric';
+              } elseif ($params[3] == 'approve') {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                  $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                  $data['question_paper_setter'] = array();
+                  $data['question_paper_setter']['id'] = (int) $params[2];
+                  $data['question_paper_setter']['approved'] = true;
+                  print('<pre>'. print_r($data, true) . '</pre>');
+                  if ($this->examModel->approve($data)) {
+                    redirect('admin/exam/' . $data['exam']->id . '/questionPaperSetters');
+                  } else {
+                    die('Something went wrong⚠');
+                  }
+                  // exit;
+                }
+              }
+            }
+          } elseif($params[1] == 'answerPaperChecker') {
+            if (!isset($params[2])) {
+            } elseif (is_numeric($params[2])) {
+              if (empty($params[3])) {
+                echo 'answerPaperChecker/numeric';
+              } elseif ($params[3] == 'approve') {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                  $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                  $data['answer_paper_checker'] = array();
+                  $data['answer_paper_checker']['id'] = (int) $params[2];
+                  $data['answer_paper_checker']['approved'] = true;
+                  print('<pre>'. print_r($data) . '</pre>');
+                  if ($this->examModel->approve($data)) {
+                    redirect('admin/exam/' . $data['exam']->id . '/answerPaperCheckers');
+                  } else {
+                    die('Something went wrong⚠');
+                  }
+                  exit;
+                }
+              }
+            }
           } elseif ($params[1] == 'external') {
             if (!isset($params[2])) {
-            } else {
-              if (is_numeric($params[2])) {
-                if (empty($params[3])) {
-                  echo 'external/numeric';
-                } else {
-                  if ($params[3] == 'allocateCollege') {
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                      $data['external'] = array();
-                      $data['external']['id'] = (int) $params[2];
-                      $data['external']['college'] = $_POST['college'];
-                      if ($this->examModel->allocateCollege($data)) {
-                        redirect('admin/exam/' . $data['exam']->id . '/externals');
-                      } else {
-                        die('Something went wrong⚠');
-                      }
-                    } else {
-                      // $_SERVER['REQUEST_METHOD'] == 'GET';
-                      $data['external'] = array();
-                      $data['external']['id'] = $params[2];
-                      $data['external']['teacher'] = $this->teacherModel->findTeacherById($data['exam']->duty->externals[$params[2]]->teacher);
-                      $data['external']['college'] = $data['exam']->duty->externals[$params[2]]->college;
-                      $data['external'] = (object) $data['external'];
-                      $this->view('admin/allocateCollegeToExternals', $data);
-                    }
+            } elseif (is_numeric($params[2])) {
+              if (empty($params[3])) {
+                echo 'external/numeric';
+              } elseif ($params[3] == 'allocateCollege') {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                  $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                  $data['external'] = array();
+                  $data['external']['id'] = (int) $params[2];
+                  $data['external']['college'] = $_POST['college'];
+                  if ($this->examModel->allocateCollege($data)) {
+                    redirect('admin/exam/' . $data['exam']->id . '/externals');
+                  } else {
+                    die('Something went wrong⚠');
                   }
+                } else {
+                  // $_SERVER['REQUEST_METHOD'] == 'GET';
+                  $data['external'] = array();
+                  $data['external']['id'] = $params[2];
+                  $data['external']['teacher'] = $this->teacherModel->findTeacherById($data['exam']->duty->externals[$params[2]]->teacher);
+                  $data['external']['college'] = $data['exam']->duty->externals[$params[2]]->college;
+                  $data['external'] = (object) $data['external'];
+                  $this->view('admin/allocateCollegeToExternals', $data);
                 }
               }
             }
