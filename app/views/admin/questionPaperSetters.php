@@ -10,7 +10,7 @@
               <div class="row p-2 align-items-center">
                 <h4 class="mb-2">Question Paper Setters</h4>
               </div>
-              <?php print('<pre>' . print_r($data, true) . '</pre>'); ?>
+              <!-- <?php print('<pre>' . print_r($data, true) . '</pre>'); ?> -->
               <!-- <div class="row p-3">
                 <div class="col-md-3 border rounded-lg m-0 p-2">name</div>
                 <div class="col-md-3 border rounded-lg m-0 p-2">email</div>
@@ -48,12 +48,12 @@
                           <div class="btn btn-primary">Aprove</div>
                         </a> -->
                         <form action="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/questionPaperSetter/<?php echo $key ?>/approve" method="post">
-                          <input type="submit" class="btn btn-primary" value="<?php echo $value->approved ? 'Approved' : 'Approve'; ?>" <?php echo $value->approved ? 'disabled' : ''; ?> />
+                          <input type="submit" class="btn btn-primary" value="<?php echo isset($value->approved) && $value->approved ? 'Approved' : 'Approve'; ?>" <?php echo isset($value->approved) && $value->approved ? 'disabled' : ''; ?> />
                         </form>
                       </td>
                       <td>
                         <form action="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/questionPaperSetter/<?php echo $key ?>/approve" method="post">
-                          <input type="submit" class="btn btn-primary" value="Pay" <?php echo $value->approved ? '' : 'disabled'; ?> />
+                          <input type="submit" class="btn btn-primary" value="Pay" <?php echo isset($value->approved) && $value->approved ? '' : 'disabled'; ?> />
                         </form>
                       </td>
                     </tr>

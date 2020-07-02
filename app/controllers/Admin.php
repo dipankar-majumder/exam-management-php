@@ -336,6 +336,20 @@ class Admin extends Controller
                   $data['external'] = (object) $data['external'];
                   $this->view('admin/allocateCollegeToExternals', $data);
                 }
+              } elseif ($params[3] == 'approve') {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                  $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                  $data['external'] = array();
+                  $data['external']['id'] = (int) $params[2];
+                  $data['external']['approved'] = true;
+                  print('<pre>'. print_r($data) . '</pre>');
+                  if ($this->examModel->approve($data)) {
+                    redirect('admin/exam/' . $data['exam']->id . '/externals');
+                  } else {
+                    die('Something went wrong⚠');
+                  }
+                  exit;
+                }
               }
             }
           }
