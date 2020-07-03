@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2020 at 02:46 PM
+-- Generation Time: Jul 03, 2020 at 01:08 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -165,7 +165,7 @@ CREATE TABLE `exams` (
 --
 
 INSERT INTO `exams` (`id`, `name`, `type`, `semester`, `date`, `subject`, `duty`) VALUES
-(16, 'Exam One', 'Theory', 1, '2020-06-08', 'Physics', '{\"question_paper_setters\":[{\"teacher\":4},{\"teacher\":3}],\"answer_paper_checkers\":[\"1\",\"2\"]}');
+(20, 'Exam 1', 'Theory', 1, '2020-07-03', 'Physics', '{\"question_paper_setters\": [{\"teacher\": 2, \"questionPaper\": \"1593772520.pdf\", \"approved\": true, \"bankDetails\": {\"name\": \"Teacher Zero\", \"IFSCCode\": \"123ASD456\", \"accountNumber\": \"123456789456123\"}, \"paymentStatus\": \"done\"}, {\"teacher\": 3}], \"answer_paper_checkers\": [{\"teacher\": 4}, {\"teacher\": 5}]}');
 
 -- --------------------------------------------------------
 
@@ -286,10 +286,10 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `email`, `email_verification_code`, `password`, `one_time_password`, `has_details`, `hrms_code`, `name`, `date_of_birth`, `highest_educational_qualification`, `additional_qualification`, `designation`, `department`, `gender`, `category`, `physically_handicapped`, `ex_service_man`, `exempted_category`, `date_of_joining_in_service`, `date_of_joining_in_present_college`, `pay_band`, `band_pay`, `grade_pay`, `pan_number`, `mobile_number`, `date_of_superannuation`, `addresses`) VALUES
-(1, 'teacher0@gmail.com', 'true', '$2y$10$Wsd67AHn42L336ZvbUJIvuSe6SMoHWnbjtJhMbM.pKU4RhtBi7BWu', '', 1, NULL, 'Teacher Zero', '2020-01-24', 'Post Doctoral', 'PG Diploma', 'Principal', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '2020-01-24', '2020-01-24', '37400-67000', 1, 1, 1, 4294967295, '2020-01-24', '{\"present_address\":{\"house_number\":\"1234\",\"location\":\"Example Street\",\"village\":\"Demo Village\",\"post_office\":\"Demo Post Office\",\"police_station\":\"Demo Police Station\",\"pin_code\":\"741248\",\"district\":\"Demo District\",\"state\":\"Demo State\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}'),
-(2, 'teacher1@gmail.com', 'true', '$2y$10$svj6cGfWK9booQ4Qc7grxu9vNvNcE1069XV2DDwGxgRBXkeVDpMci', NULL, 1, NULL, 'Teacher One', '2020-01-28', 'Post Doctoral', 'PG Diploma', 'Gr-D', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '2020-01-28', '2020-01-28', '37400-67000', 1, 1, 1, 4294967295, '2020-01-28', '{\"present_address\":{\"house_number\":\"1234\",\"location\":\"Street Name\",\"village\":\"Village\",\"post_office\":\"Post Office\",\"police_station\":\"Police Station\",\"pin_code\":\"000001\",\"district\":\"District\",\"state\":\"State\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"Street Name\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}'),
-(3, 'teacher2@gmail.com', 'true', '$2y$10$EX8URHpFFzMT/XPqqjf7y.jb1fT7HlySdBdWGZjs1nPg8fgcYxBzW', NULL, 1, NULL, 'Teacher Two', '2020-06-08', 'Post Doctoral', 'PG Diploma', 'Principal', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '2020-06-08', '2020-06-08', '5400-25200', 1, 1, 1, 4294967295, '2020-06-08', '{\"present_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}'),
-(4, 'teacher3@gmail.com', 'true', '$2y$10$CKTxBJ.UduYFxGY45CmYVurV7T8fft8iB8n1mbpsGeP8I4Z0mPytS', NULL, 1, NULL, 'Teacher Three', '2020-06-08', 'M. Phil.', '', 'Associate Professor', 'Mathematics', 'Male', 'Unreserved', 0, 0, 0, '2020-06-08', '2020-06-08', '5400-25200', 1, 1, 1, 4294967295, '2020-06-08', '{\"present_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}');
+(2, 'teacher0@gmail.com', 'true', '$2y$10$Wsd67AHn42L336ZvbUJIvuSe6SMoHWnbjtJhMbM.pKU4RhtBi7BWu', '', 1, NULL, 'Teacher Zero', '2020-01-24', 'Post Doctoral', 'PG Diploma', 'Principal', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '2020-01-24', '2020-01-24', '37400-67000', 1, 1, 1, 4294967295, '2020-01-24', '{\"present_address\":{\"house_number\":\"1234\",\"location\":\"Example Street\",\"village\":\"Demo Village\",\"post_office\":\"Demo Post Office\",\"police_station\":\"Demo Police Station\",\"pin_code\":\"741248\",\"district\":\"Demo District\",\"state\":\"Demo State\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}'),
+(3, 'teacher1@gmail.com', 'true', '$2y$10$svj6cGfWK9booQ4Qc7grxu9vNvNcE1069XV2DDwGxgRBXkeVDpMci', NULL, 1, NULL, 'Teacher One', '2020-01-28', 'Post Doctoral', 'PG Diploma', 'Gr-D', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '2020-01-28', '2020-01-28', '37400-67000', 1, 1, 1, 4294967295, '2020-01-28', '{\"present_address\":{\"house_number\":\"1234\",\"location\":\"Street Name\",\"village\":\"Village\",\"post_office\":\"Post Office\",\"police_station\":\"Police Station\",\"pin_code\":\"000001\",\"district\":\"District\",\"state\":\"State\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"Street Name\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}'),
+(4, 'teacher2@gmail.com', 'true', '$2y$10$EX8URHpFFzMT/XPqqjf7y.jb1fT7HlySdBdWGZjs1nPg8fgcYxBzW', NULL, 1, NULL, 'Teacher Two', '2020-06-08', 'Post Doctoral', 'PG Diploma', 'Principal', 'Computer Science', 'Male', 'Unreserved', 0, 0, 0, '2020-06-08', '2020-06-08', '5400-25200', 1, 1, 1, 4294967295, '2020-06-08', '{\"present_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}'),
+(5, 'teacher3@gmail.com', 'true', '$2y$10$CKTxBJ.UduYFxGY45CmYVurV7T8fft8iB8n1mbpsGeP8I4Z0mPytS', NULL, 1, NULL, 'Teacher Three', '2020-06-08', 'M. Phil.', '', 'Associate Professor', 'Mathematics', 'Male', 'Unreserved', 0, 0, 0, '2020-06-08', '2020-06-08', '5400-25200', 1, 1, 1, 4294967295, '2020-06-08', '{\"present_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"},\"permanent_address\":{\"house_number\":\"\",\"location\":\"\",\"village\":\"\",\"post_office\":\"\",\"police_station\":\"\",\"pin_code\":\"\",\"district\":\"\",\"state\":\"\"}}');
 
 --
 -- Indexes for dumped tables
@@ -400,7 +400,7 @@ ALTER TABLE `educational_qualifications`
 -- AUTO_INCREMENT for table `exams`
 --
 ALTER TABLE `exams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `genders`
