@@ -26,7 +26,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Answer Paper Submission Slip</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -44,9 +44,17 @@
                         </a>
                       </td>
                       <td>
-                        <a href="#">
+                        <!-- <a href="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/answerPaperChecker/<?php echo $key ?>/approve">
                           <div class="btn btn-primary">Aprove</div>
-                        </a>
+                        </a> -->
+                        <form action="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/answerPaperChecker/<?php echo $key ?>/approve" method="post">
+                          <input type="submit" class="btn btn-primary" value="<?php echo isset($value->approved) && $value->approved ? 'Approved' : 'Approve'; ?>" <?php echo isset($value->approved) && $value->approved ? 'disabled' : ''; ?> />
+                        </form>
+                      </td>
+                      <td>
+                        <form action="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/answerPaperChecker/<?php echo $key ?>/approve" method="post">
+                          <input type="submit" class="btn btn-primary" value="Pay" <?php echo isset($value->approved) && $value->approved ? '' : 'disabled'; ?> />
+                        </form>
                       </td>
                     </tr>
                   <?php endforeach; ?>
