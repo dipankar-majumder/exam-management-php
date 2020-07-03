@@ -458,7 +458,7 @@ class Teachers extends Controller
             $data['exam']->duty->question_paper_setters = array_map(function ($question_paper_setter, $bankDetails) {
               $question_paper_setter = (array) $question_paper_setter;
               if ($question_paper_setter['teacher'] == $_SESSION['teacher_id']) {
-                $question_paper_setter['bankDetails'] = json_encode((object) $bankDetails);
+                $question_paper_setter['bankDetails'] = (object) $bankDetails;
               }
               return (object) $question_paper_setter;
             }, $data['exam']->duty->question_paper_setters, array_pad(array(), count($data['exam']->duty->question_paper_setters), $bankDetails));
@@ -558,42 +558,66 @@ class Teachers extends Controller
       $data['exams'] = array_filter($data['exams'], function ($value, $key) {
         return strpos($value->duty_path, 'answer_paper_checker') != false;
       }, ARRAY_FILTER_USE_BOTH);
-      // print('<pre>' . print_r($data, true) . '</pre>');
-      // exit;
       $this->view('teachers/answerPaper', $data);
     } else {
       if (is_numeric($params[0])) {
         if (!isset($params[1])) {
-        } else {
-          if ($params[1] == 'upload') {
-            $data = array();
-            $data['exam'] = $this->examModel->findExamById($params[0]);
-            $data['exam']->duty = json_decode($data['exam']->duty);
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-              $targetFile = sprintf(
-                "%s.%s",
-                time(),
-                preg_split('/\./', $_FILES['answerPaperSubmissionSlip']['name'])[count(preg_split('/\./', $_FILES['answerPaperSubmissionSlip']['name'])) - 1]
-              );
-              if (file_exists($targetFile)) {
-                die('File Exists⚠');
-              }
-              move_uploaded_file($_FILES['answerPaperSubmissionSlip']['tmp_name'], UPLOADSROOT . '/' . $targetFile);
-              $data['exam']->duty->answer_paper_checkers = array_map(function ($answer_paper_checker, $targetFile) {
-                $answer_paper_checker = (array) $answer_paper_checker;
-                if ($answer_paper_checker['teacher'] == $_SESSION['teacher_id']) {
-                  $answer_paper_checker['answerPaperSubmissionSlip'] = $targetFile;
-                }
-                return (object) $answer_paper_checker;
-              }, $data['exam']->duty->answer_paper_checkers, array_pad(array(), count($data['exam']->duty->answer_paper_checkers), $targetFile));
-              if ($this->examModel->updateDuty((array) $data['exam'])) {
-                redirect('teachers/answerPaper');
-              } else {
-                die('Something Went Wrong⚠');
-              }
-            } else {
+        } elseif ($params[1] == 'upload') {
+          $data = array();
+          $data['exam'] = $this->examModel->findExamById($params[0]);
+          $data['exam']->duty = json_decode($data['exam']->duty);
+          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $targetFile = sprintf(
+              "%s.%s",
+              time(),
+              preg_split('/\./', $_FILES['answerPaperSubmissionSlip']['name'])[count(preg_split('/\./', $_FILES['answerPaperSubmissionSlip']['name'])) - 1]
+            );
+            if (file_exists($targetFile)) {
+              die('File Exists⚠');
             }
-        }
+            move_uploaded_file($_FILES['answerPaperSubmissionSlip']['tmp_name'], UPLOADSROOT . '/' . $targetFile);
+            $data['exam']->duty->answer_paper_checkers = array_map(function ($answer_paper_checker, $targetFile) {
+              $answer_paper_checker = (array) $answer_paper_checker;
+              if ($answer_paper_checker['teacher'] == $_SESSION['teacher_id']) {
+                $answer_paper_checker['answerPaperSubmissionSlip'] = $targetFile;
+              }
+              return (object) $answer_paper_checker;
+            }, $data['exam']->duty->answer_paper_checkers, array_pad(array(), count($data['exam']->duty->answer_paper_checkers), $targetFile));
+            if ($this->examModel->updateDuty((array) $data['exam'])) {
+              redirect('teachers/answerPaper');
+            } else {
+              die('Something Went Wrong⚠');
+            }
+          } else {
+          }
+        } elseif ($params[1] == 'fillPaymentDetails') {
+          $data = array();
+          $data['exam'] = $this->examModel->findExamById($params[0]);
+          $data['exam']->duty = json_decode($data['exam']->duty);
+          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $bankDetails = array();
+            $bankDetails['name'] = $_POST['name'];
+            $bankDetails['IFSCCode'] = $_POST['IFSCCode'];
+            $bankDetails['accountNumber'] = $_POST['accountNumber'];
+            $data['exam']->duty->answer_paper_checkers = array_map(function ($answer_paper_checker, $bankDetails) {
+              $answer_paper_checker = (array) $answer_paper_checker;
+              if ($answer_paper_checker['teacher'] == $_SESSION['teacher_id']) {
+                $answer_paper_checker['bankDetails'] = json_encode((object) $bankDetails);
+              }
+              return (object) $answer_paper_checker;
+            }, $data['exam']->duty->answer_paper_checkers, array_pad(array(), count($data['exam']->duty->answer_paper_checkers), $bankDetails));
+            // print('<pre>' . print_r($data['exam'], true) . '</pre>');
+            // exit;
+            if ($this->examModel->updateDuty((array) $data['exam'])) {
+              redirect('teachers/questionPaper');
+            } else {
+              die('Something Went Wrong⚠');
+            }
+          } else {
+            // $_SERVER['REQUEST_METHOD'] == 'GET'
+            $this->view('teachers/fillPaymentDetails', $data);
+          }
         }
       }
     }

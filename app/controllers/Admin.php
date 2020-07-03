@@ -242,6 +242,7 @@ class Admin extends Controller
               // }
               $data['questionPaperSetters'][$key]['questionPaper'] = isset($value->questionPaper) ? $value->questionPaper : null;
               $data['questionPaperSetters'][$key]['approved'] = isset($value->approved) ? $value->approved : null;
+              $data['questionPaperSetters'][$key]['paymentStatus'] = isset($value->paymentStatus) ? $value->paymentStatus : null;
               $data['questionPaperSetters'][$key] = (object) $data['questionPaperSetters'][$key];
             }
             $this->view('admin/questionPaperSetters', $data);
@@ -287,6 +288,23 @@ class Admin extends Controller
                     die('Something went wrong⚠');
                   }
                   // exit;
+                }
+              } elseif ($params[3] == 'pay') {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                  $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                  $data['question_paper_setter'] = array();
+                  $data['question_paper_setter']['id'] = (int) $params[2];
+                  $data['question_paper_setter']['paymentStatus'] = 'done';
+                  // print('<pre>'. print_r($data, true) . '</pre>');
+                  // exit;
+                  if ($this->examModel->pay($data)) {
+                    redirect('admin/exam/' . $data['exam']->id . '/questionPaperSetters');
+                  } else {
+                    die('Something went wrong⚠');
+                  }
+                } else {
+                  // $_SERVER['REQUEST_METHOD'] == 'GET'
+                  $this->view('admin/payment', $data);
                 }
               }
             }

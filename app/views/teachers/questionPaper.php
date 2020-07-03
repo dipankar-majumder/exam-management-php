@@ -55,7 +55,9 @@
             <?php endif; ?>
           <?php endforeach; ?>
           <?php foreach ($exam->duty->question_paper_setters as $questionPaperSetter) : ?>
-            <?php if ($questionPaperSetter->teacher == $_SESSION['teacher_id'] && isset($questionPaperSetter->bankDetails) && !(empty($questionPaperSetter->approved) || !$questionPaperSetter->approved)) : ?>
+            <?php if ($questionPaperSetter->teacher == $_SESSION['teacher_id'] && isset($questionPaperSetter->paymentStatus) && $questionPaperSetter->paymentStatus == 'done') : ?>
+              Paid
+            <?php elseif ($questionPaperSetter->teacher == $_SESSION['teacher_id'] && isset($questionPaperSetter->bankDetails) && !(empty($questionPaperSetter->approved) || !$questionPaperSetter->approved)) : ?>
               Payment Request Sent
             <?php endif; ?>
           <?php endforeach; ?>

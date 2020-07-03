@@ -10,7 +10,7 @@
               <div class="row p-2 align-items-center">
                 <h4 class="mb-2">Question Paper Setters</h4>
               </div>
-              <!-- <?php print('<pre>' . print_r($data, true) . '</pre>'); ?> -->
+              <?php print('<pre>' . print_r($data, true) . '</pre>'); ?>
               <!-- <div class="row p-3">
                 <div class="col-md-3 border rounded-lg m-0 p-2">name</div>
                 <div class="col-md-3 border rounded-lg m-0 p-2">email</div>
@@ -51,10 +51,17 @@
                           <input type="submit" class="btn btn-primary" value="<?php echo isset($value->approved) && $value->approved ? 'Approved' : 'Approve'; ?>" <?php echo isset($value->approved) && $value->approved ? 'disabled' : ''; ?> />
                         </form>
                       </td>
-                      <td>
-                        <form action="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/questionPaperSetter/<?php echo $key ?>/approve" method="post">
-                          <input type="submit" class="btn btn-primary" value="Pay" <?php echo isset($value->approved) && $value->approved ? '' : 'disabled'; ?> />
+                      <!-- <td>
+                        <form action="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/questionPaperSetter/<?php echo $key ?>/pay" method="post">
+                          <input type="submit" class="btn btn-primary" value="<?php echo isset($value->paymentStatus) && $value->paymentStatus == 'done' ? 'Paid' : 'Pay' ?>" <?php echo isset($value->approved) && $value->approved ? '' : 'disabled'; ?> />
                         </form>
+                      </td> -->
+                      <td>
+                        <a href="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/questionPaperSetter/<?php echo $key ?>/pay">
+                          <button class="btn btn-primary" <?php echo isset($value->approved) && $value->approved ? '' : 'disabled'; ?> <?php echo isset($value->paymentStatus) && $value->paymentStatus == 'done' ? 'disabled' : ''; ?>>
+                            <?php echo isset($value->paymentStatus) && $value->paymentStatus == 'done' ? 'Paid' : 'Pay' ?>
+                          </button>
+                        </a>
                       </td>
                     </tr>
                   <?php endforeach; ?>
