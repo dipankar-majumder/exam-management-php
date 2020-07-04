@@ -12,3 +12,4 @@
 <body>
   <?php require APPROOT . '/views/teachers/inc/navbar.php'; ?>
   <?php require APPROOT . '/views/teachers/inc/sidenav.php'; ?>
+  <div class="container">

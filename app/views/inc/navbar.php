@@ -16,30 +16,21 @@
           <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">About</a>
         </li>
       </ul>
-
       <ul class="navbar-nav ml-auto">
-        <?php if (isset($_SESSION['teacher_id'])) : ?>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/teachers/logout">
-              Log Out
-            </a>
-          </li>
-        <?php else : ?>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/teachers">
-              <div class="btn btn-sm btn-primary">
-                Teachers Panel
-              </div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/admin">
-              <div class="btn btn-sm btn-primary">
-                Admin Panel
-              </div>
-            </a>
-          </li>
-        <?php endif; ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo URLROOT; ?>/teachers">
+            <div class="btn btn-sm btn-primary">
+              Teachers Panel
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo URLROOT; ?>/admin">
+            <div class="btn btn-sm btn-primary">
+              Admin Panel
+            </div>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
