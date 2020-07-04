@@ -12,6 +12,6 @@ define('UPLOADSROOT', dirname(dirname(dirname(__FILE__))) . '/public/uploads');
 // URL Root
 define('URLROOT', 'http://localhost/exam-management-php');
 // Site Name
-define('SITENAME', 'Exam Management');
+define('SITENAME', 'Exam Remuneration Management');
 // App Version
 define('APPVERSION', '0.0.1');

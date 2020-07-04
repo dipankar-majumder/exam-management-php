@@ -1,22 +1,24 @@
 <?php require APPROOT . '/views/teachers/inc/header.php'; ?>
-<h2>Teacher's Question Paper Page</h2>
-<table border="1">
-  <thead>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Upload Question Paper</th>
-    <th>Approve Status</th>
-    <th>Request for Payment</th>
+<h2>Question Papers</h2>
+<table class="table table-responsive table-hover table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Upload Question Paper</th>
+      <th scope="col">Approve Status</th>
+      <th scope="col">Request for Payment</th>
+    </tr>
   </thead>
   <tbody>
     <?php if (!count($data['exams'])) : ?>
       <tr>
-        <td colspan="2">Empty</td>
+        <td colspan="5">Empty</td>
       </tr>
     <?php endif; ?>
-    <?php print('<pre>' . print_r($data, true) . '</pre>') ?>
+    <!-- <?php print('<pre>' . print_r($data, true) . '</pre>') ?> -->
     <?php foreach ($data['exams'] as $key => $exam) : ?>
-      <tr>
+      <tr scope="row">
         <td><?php echo $exam->id; ?></td>
         <td><?php echo $exam->name; ?></td>
         <td>

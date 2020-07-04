@@ -18,9 +18,12 @@ function getUrl() {
               <div class="row p-2 align-items-center">
                 <h4 class="mb-2">Enter Payment Details</h4>
               </div>
-              <?php print('<pre>' . print_r($data, true) . '</pre>'); ?>
+              <!-- <?php print('<pre>' . print_r($data, true) . '</pre>'); ?> -->
               <?php // print_r(getUrl()[4]); ?>
               <?php // print_r($data['exam']->duty->question_paper_setters[0]); ?>
+              <?php if (!isset($data['exam']->duty->question_paper_setters[getUrl()[4]]->bankDetails)) : ?>
+                <div class="text-info">Bank Details Not Provided or Not applied for ayment.</div>
+              <?php endif; ?>
               <div class="row p-2 align-items-center">
                 <?php if (strpos($_GET['url'], 'questionPaperSetter')) : ?>
                 <div class="row row-cols-2">
@@ -34,10 +37,10 @@ function getUrl() {
                   <?php endforeach; ?>
                 </div>
                 <?php endif; ?>
-                <form action="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/questionPaperSetter/<?php echo getUrl()[4] ?>/pay" method="post">
-                  <input type="submit" value="Pay" class="btn btn-primary">
-                </form>
               </div>
+              <form action="<?php echo URLROOT ?>/admin/exam/<?php echo $data['exam']->id ?>/questionPaperSetter/<?php echo getUrl()[4] ?>/pay" method="post">
+                <input type="submit" value="Pay" class="btn btn-primary" <?php echo isset($data['exam']->duty->question_paper_setters[getUrl()[4]]->bankDetails) ? '' : 'disabled' ?>>
+              </form>
             </div>
           </div>
         </div>
